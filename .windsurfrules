@@ -1,0 +1,3 @@
+Before writing any UI code, read `AGENTS.md` and `SKILL.md` in this repo and follow them exactly.
+Copy `kit/` unchanged, use the `demo/dashboard.html` shell, `sr-` classes, `tone-*` colours, `sr-icon` icons (Heroicons default),
+clean white cards with high-contrast text, fully responsive (360–1440px), pagination for long lists, light + dark mode.
