@@ -1,3 +1,15 @@
 # Instructions for Claude
 Read `AGENTS.md`, then `SKILL.md` in full, before writing UI code. Follow them exactly.
 This repo can also be installed as a Claude skill: `skills/sunrise-dashboard-ui/SKILL.md`.
+
+
+## Hard rules learned from real sites (v5) — break none of these
+- Stat cards = the exact `.sr-stat` strip markup in SKILL.md §6h (icon LEFT, label+value, pill RIGHT). Never icon-on-top, never custom card CSS.
+- Admin module lists = `.sr-modules > .sr-module`. Headers with buttons = `.sr-page-head` + `.sr-page-head__actions`.
+- Numbers/money never wrap (`.sr-stat__value`, `.sr-metric__v`, `.sr-money`). Text children of flex/grid get `min-width:0` (`.sr-grow`).
+- Never add `position:relative` to all children of buttons/cards (breaks tap ripple → cards jump on click).
+- Filter selects go in `.sr-filter-row`; public pages use `.sr-site-head`.
+- Before finishing: open each page with `?sr-debug` at 360 px wide → must report "No overflow". See SKILL.md §6i.
+
+- Every signed-in page has the top-right avatar menu ending in **Log out** (SKILL.md §6j). Compulsory.
+- Phone text sizes are DreamWork-exact (SKILL.md §6k). Never enlarge fonts or paddings on phones; run tools/dw_measure.py → "OFF: 0".

@@ -17,6 +17,8 @@ No framework, no build step: 4 files.
 ## Quick start
 Open `demo/login.html` (or `demo/dashboard.html`) in a browser (sidebar → Admin → Theme studio to recolour).
 
+**Check any page for layout bugs:** add `?sr-debug` to its URL. Anything wider than the screen is outlined red. Automated check of every demo page at 5 widths: `python3 tools/qa.py "$PWD/demo" admin,public,dashboard,login` (needs Playwright).
+
 ```html
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -40,7 +42,7 @@ Icon libraries: `heroicons` (default), `fluent`, `lucide`, `tabler`, `fontawesom
 | Path | What |
 |---|---|
 | `kit/` | `sunrise.css` (design system), `sunrise-theme.js` (themes, dark mode, admin config), `sunrise-icons.js` (5 icon libraries, inline SVG), `sunrise-ui.js` (ripple, sheets, tabs, pagination, toasts, Theme Studio) |
-| `demo/` | `login.html`, `register.html`, `forgot.html`, `dashboard.html`, `transactions.html` (cash out + pagination), `pages.html` (lessons, tasks, referrals, account) |
+| `demo/` | `login.html`, `register.html`, `forgot.html`, `dashboard.html`, `transactions.html` (cash out + pagination), `pages.html` (lessons, tasks, referrals, account), `admin.html` (admin panel: stat strips, modules, page heads with buttons, metrics), `public.html` (logged-out header, search, filters, Yes/No pills, upload, step form) |
 | `SKILL.md` | Full rules: responsive, icons, motion, components, mobile patterns, backend theme saving, checklist |
 | `AGENTS.md` | Instructions any AI coding tool should follow (also `CLAUDE.md`, `GEMINI.md`, `.cursor/rules`, `.windsurfrules`, `.github/copilot-instructions.md`) |
 | `skills/sunrise-dashboard-ui/` | The same rules packaged as a Claude skill |

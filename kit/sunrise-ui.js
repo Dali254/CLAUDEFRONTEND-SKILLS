@@ -309,5 +309,22 @@
     });
   });
 
+
+  /* ?sr-debug → outline any element that overflows the viewport, log it to the console */
+  if (/[?&]sr-debug/.test(location.search)) w.addEventListener('load', function () {
+    var vw = d.documentElement.clientWidth, n = 0;
+    $$('body *').forEach(function (el) { var r = el.getBoundingClientRect(); if (r.right > vw + 1 || r.left < -1) { el.classList.add('sr-debug-overflow'); n++; if (w.console) console.warn('[sr-debug] overflow', el); } });
+    Toast.show({ type: n ? 'error' : 'success', title: n ? n + ' elements overflow' : 'No overflow', text: n ? 'Outlined in red. See the console.' : 'Layout fits ' + vw + 'px.', life: 0 });
+  });
+  /* upload preview: <label class="sr-upload"><input type="file" accept="image/*">…<span class="sr-upload__thumb"></span> */
+  d.addEventListener('change', function (e) {
+    var i = e.target; if (!i.closest || !i.closest('.sr-upload') || !i.files || !i.files[0]) return;
+    var t = i.closest('.sr-upload').querySelector('.sr-upload__thumb'), f = i.files[0];
+    if (t && /^image\//.test(f.type)) { var u = URL.createObjectURL(f); t.innerHTML = '<img alt="" src="' + u + '">'; }
+    var s = i.closest('.sr-upload').querySelector('strong'); if (s) s.textContent = f.name;
+  });
+  /* filter selects get an active state when a value is chosen */
+  d.addEventListener('change', function (e) { var f = e.target.closest && e.target.closest('.sr-filter'); if (f) f.classList.toggle('is-active', !!e.target.value); });
+
   w.SRToast = Toast; w.SRStudio = Studio;
 })(window, document);

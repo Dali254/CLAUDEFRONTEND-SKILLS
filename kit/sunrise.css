@@ -299,7 +299,7 @@ img,svg{display:block;max-width:100%}
 /* ---------- 16. FEATURE TILES ("Start earning" cards) ---------- */
 .sr-tile-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:.75rem}
 @media (min-width:900px){.sr-tile-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.125rem}}
-.sr-tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:1rem;padding:1rem 1rem 1rem 1.125rem;border:1px solid color-mix(in srgb,var(--tone) 16%,var(--line));border-radius:var(--r-lg);background:radial-gradient(circle,color-mix(in srgb,var(--tone) 22%,transparent) 1px,transparent 1.5px) 100% 0/10px 10px no-repeat,radial-gradient(110% 90% at 100% 0%,color-mix(in srgb,var(--tone) 10%,transparent),transparent 62%),var(--surface);background-size:6rem 4rem,auto,auto;box-shadow:0 1px 2px #3c1e0a0a,0 14px 28px -22px color-mix(in srgb,var(--tone) 75%,transparent);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .2s;-webkit-tap-highlight-color:transparent}
+.sr-tile{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:1rem;padding:1rem 1rem 1rem 1.125rem;border:1px solid color-mix(in srgb,var(--tone) 16%,var(--line));border-radius:var(--r-lg);background:radial-gradient(110% 90% at 100% 0%,color-mix(in srgb,var(--tone) 10%,transparent),transparent 62%),var(--surface);box-shadow:0 1px 2px #3c1e0a0a,0 14px 28px -22px color-mix(in srgb,var(--tone) 75%,transparent);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .2s;-webkit-tap-highlight-color:transparent}
 .sr-tile::before{content:"";position:absolute;left:0;top:.875rem;bottom:.875rem;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(180deg,color-mix(in srgb,var(--tone) 55%,#fff),var(--tone))}
 .sr-tile:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--tone) 35%,var(--line));box-shadow:0 2px 4px #3c1e0a0d,0 24px 40px -22px color-mix(in srgb,var(--tone) 85%,transparent)}
 .sr-tile:active{transform:scale(.985)}
@@ -524,7 +524,7 @@ textarea.sr-input{height:auto;min-height:7rem;padding:.75rem 1rem;resize:vertica
 .sr-quick__item{overflow:visible}
 .sr-ripple{position:absolute;z-index:0;border-radius:50%;pointer-events:none;width:var(--d);height:var(--d);left:var(--x);top:var(--y);background:currentColor;opacity:.22;transform:translate(-50%,-50%) scale(0);animation:sr-ripple .6s var(--ease) forwards}
 .sr-btn--primary .sr-ripple,.sr-nav-link.is-active .sr-ripple{background:#fff;opacity:.35}
-.sr-btn > *,.sr-tile > *:not(.sr-tile__ghost){position:relative;z-index:1}
+.sr-btn > :not(.sr-ripple),.sr-tile > :not(.sr-tile__ghost):not(.sr-ripple){position:relative;z-index:1}
 /* icon pop on click */
 .is-popping .ph-duotone,.is-popping .ph,.is-popping .sr-icon{animation:sr-pop .42s var(--ease) both}
 .sr-tab.is-active .sr-tab__icon{animation:sr-bounce .5s var(--ease)}
@@ -1178,3 +1178,398 @@ html.dark .sr-verified{color:#4ade80}
 .sr-toast.is-sticky::after{display:none}
 .sr-toast:hover::after,.sr-toast.is-paused::after{animation-play-state:paused}
 .sr-toast__icon{display:none}
+
+/* =====================================================================
+   52. v5 STABILITY LAYER — fixes found on real sites (do not remove)
+   ===================================================================== */
+/* ripple can never take part in layout */
+.sr-ripple{position:absolute!important;z-index:0!important;margin:0!important;grid-area:auto!important}
+/* tap feedback without layout change: only transform/opacity, never size */
+.sr-tile,.sr-reward,.sr-media,.sr-feature,.sr-task,.sr-stat,.sr-module{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (hover:none){.sr-tile:active,.sr-module:active,.sr-reward:active{transform:scale(.985)}}
+/* ghost icon: bottom-right corner, behind content, never over text */
+.sr-tile__ghost,.sr-tile__ghost.sr-icon{right:-.75rem!important;left:auto!important;top:auto!important;bottom:-1.25rem!important;font-size:5.5rem!important;opacity:.07!important;transform:none!important}
+@media (max-width:640px){.sr-tile__ghost,.sr-tile__ghost.sr-icon{font-size:4.5rem!important}}
+/* flex/grid children shrink instead of overflowing */
+.sr-grow,.sr-flex > *,.sr-head > *,.sr-tile > div,.sr-row > div,.sr-panel__head > *{min-width:0}
+/* never break short labels, links, buttons, amounts */
+.sr-btn,.sr-link,.sr-pill-link,.sr-chip-btn,.sr-badge,.sr-tab,.sr-money,.sr-amount,.sr-tile__v,.sr-kpi__v,.sr-stat__value,.sr-split-stats dd,.sr-metric__v,.sr-site-head__link{white-space:nowrap}
+/* long words (emails, names) wrap instead of pushing the page wider */
+.sr-panel__body,.sr-row__title,.sr-cell__title,.sr-page-head__text,.sr-alert__text,.sr-hint{overflow-wrap:anywhere}
+html,body{max-width:100%;overflow-x:clip}
+img,video,iframe,svg{max-width:100%}
+/* sticky bars: solid enough to read, content never shows through */
+.sr-topbar__bar{background:color-mix(in srgb,var(--surface-solid) 96%,transparent)!important}
+.sr-tabbar{background:color-mix(in srgb,var(--surface-solid) 97%,transparent)!important}
+.sr-topbar{margin-bottom:.25rem}
+.sr-topbar::after{content:"";position:absolute;left:0;right:0;top:100%;height:.75rem;background:linear-gradient(var(--paper),transparent);pointer-events:none}
+/* anchored content never hides under sticky bars */
+html{scroll-padding-top:6rem;scroll-padding-bottom:calc(var(--tabbar-h) + 1.5rem)}
+
+/* ---------- 53. PAGE HEAD (title + description + actions) ---------- */
+.sr-page-head{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.875rem 1rem;align-items:center;padding:1.25rem;border-radius:1.375rem;border:1px solid color-mix(in srgb,var(--tone,var(--brand)) 18%,var(--line));
+  background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--tone,var(--brand)) 10%,transparent),transparent 60%),var(--surface-solid);box-shadow:0 14px 32px -26px color-mix(in srgb,var(--tone,var(--brand)) 60%,#000)}
+.sr-page-head > .sr-glyph{width:3.25rem;height:3.25rem;border-radius:1rem}
+.sr-page-head__kicker{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tone-fg,var(--brand-fg));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-page-head__title{margin-top:.125rem;font-family:var(--font-display);font-weight:800;letter-spacing:-.035em;line-height:1.15;color:var(--heading);font-size:clamp(1.35rem,1.1rem + 1.2vw,2rem)}
+.sr-page-head__text{grid-column:1/-1;font-size:.92rem;line-height:1.55;color:var(--text)}
+.sr-page-head__actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.5rem}
+.sr-page-head__actions .sr-btn{flex:1 1 auto}
+@media (min-width:768px){
+  .sr-page-head{grid-template-columns:auto minmax(0,1fr) auto;padding:1.5rem 1.75rem}
+  .sr-page-head__actions{grid-column:3;grid-row:1;flex-wrap:nowrap}
+  .sr-page-head__actions .sr-btn{flex:0 0 auto}
+  .sr-page-head__text{grid-column:2/-1}
+}
+
+/* ---------- 54. METRICS (2×2 numbers that never break) ---------- */
+.sr-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:1.25rem;background:var(--surface-solid);overflow:hidden}
+@media (min-width:1024px){.sr-metrics--4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sr-metric{padding:1rem 1.125rem;min-width:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sr-metric:nth-child(2n){border-right:0}
+.sr-metric:nth-last-child(-n+2){border-bottom:0}
+@media (min-width:1024px){.sr-metrics--4 .sr-metric{border-bottom:0;border-right:1px solid var(--line)}.sr-metrics--4 .sr-metric:last-child{border-right:0}}
+.sr-metric__k{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-metric__v{margin-top:.375rem;display:flex;align-items:baseline;gap:.3rem;font-family:var(--font-display);font-weight:800;letter-spacing:-.035em;line-height:1.05;color:var(--heading);font-size:clamp(1.35rem,1.05rem + 1.4vw,2rem);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+.sr-metric__v small{font-family:var(--font-sans);font-size:.55em;font-weight:600;letter-spacing:0;color:var(--muted)}
+.sr-metric__s{margin-top:.25rem;font-size:.78rem;color:var(--muted)}
+
+/* ---------- 55. MODULE LIST (big tappable rows: admin modules, categories) ---------- */
+.sr-modules{display:grid;gap:.75rem;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.sr-modules{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}}
+@media (min-width:1280px){.sr-modules--3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sr-module{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.875rem;padding:.875rem 1rem .875rem 1rem;border-radius:1.25rem;border:1px solid color-mix(in srgb,var(--tone) 18%,var(--line));
+  background:radial-gradient(110% 90% at 100% 0%,color-mix(in srgb,var(--tone) 8%,transparent),transparent 62%),var(--surface-solid);transition:transform .2s var(--ease),box-shadow .25s,border-color .2s;color:inherit}
+.sr-module::before{content:"";position:absolute;left:0;top:.875rem;bottom:.875rem;width:3px;border-radius:0 3px 3px 0;background:var(--tone)}
+@media (hover:hover){.sr-module:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--tone) 35%,var(--line));box-shadow:0 18px 32px -24px var(--tone)}}
+.sr-module > .sr-glyph{width:3rem;height:3rem;border-radius:.875rem}
+.sr-module__k{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tone-fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-module__t{font-family:var(--font-display);font-weight:700;letter-spacing:-.025em;font-size:1.08rem;line-height:1.25;color:var(--heading);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-module__s{font-size:.84rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-module__go{width:2rem;height:2rem;display:inline-flex;align-items:center;justify-content:center;border-radius:.625rem;background:color-mix(in srgb,var(--tone) 10%,transparent);color:var(--tone-fg);font-size:1rem}
+.sr-module__count{min-width:1.5rem;padding:.1rem .45rem;border-radius:var(--r-pill);background:var(--tone);color:#fff;font-size:.7rem;font-weight:700;text-align:center}
+
+/* ---------- 56. PUBLIC HEADER (logged-out pages) ---------- */
+.sr-site-head{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface-solid) 96%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding-top:env(safe-area-inset-top)}
+.sr-site-head__bar{display:flex;align-items:center;gap:.5rem;height:3.75rem;width:min(76rem,100% - 1.5rem);margin:0 auto}
+.sr-site-head__nav{display:none;gap:.25rem;margin-left:1.5rem}
+.sr-site-head__link{display:inline-flex;align-items:center;height:2.5rem;padding:0 .875rem;border-radius:.75rem;font-weight:600;font-size:.92rem;color:var(--text)}
+.sr-site-head__link:hover,.sr-site-head__link[aria-current="page"]{background:var(--sunken);color:var(--heading)}
+.sr-site-head__right{margin-left:auto;display:flex;align-items:center;gap:.25rem;flex:none}
+.sr-site-head .sr-logo{min-width:0;flex-shrink:1}
+.sr-site-head .sr-logo__word{overflow:hidden;text-overflow:ellipsis}
+.sr-site-head__signin{font-weight:700;color:var(--brand-fg);padding:0 .625rem;height:2.5rem;display:inline-flex;align-items:center;white-space:nowrap}
+.sr-site-head__cta{display:none}
+@media (min-width:900px){.sr-site-head__nav{display:flex}.sr-site-head__burger{display:none}.sr-site-head__cta{display:inline-flex}}
+@media (max-width:380px){.sr-site-head .sr-logo__word{font-size:.92rem}.sr-site-head [data-sr-theme-toggle]{display:none}}
+
+/* ---------- 57. SEARCH CARD + FILTER ROW ---------- */
+.sr-search{border:1px solid var(--line);border-radius:1.25rem;background:var(--surface-solid);box-shadow:var(--sh-sm);overflow:hidden}
+.sr-search__field{display:flex;align-items:center;gap:.75rem;padding:0 1rem;height:3.5rem}
+.sr-search__field + .sr-search__field{border-top:1px solid var(--line)}
+.sr-search__field .ph{font-size:1.2rem;color:var(--muted);flex:none}
+.sr-search__field input,.sr-search__field select{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font-size:1rem;color:var(--heading);appearance:none}
+.sr-search__go{margin:.5rem;width:calc(100% - 1rem)}
+@media (min-width:900px){.sr-search{display:flex;align-items:center}.sr-search__field{flex:1}.sr-search__field + .sr-search__field{border-top:0;border-left:1px solid var(--line)}.sr-search__go{width:auto;flex:none}}
+.sr-filter-row{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;margin:0 -1rem;padding:.25rem 1rem;scroll-snap-type:x proximity}
+.sr-filter-row::-webkit-scrollbar{display:none}
+@media (min-width:768px){.sr-filter-row{margin:0;padding:.25rem 0;flex-wrap:wrap;overflow:visible}}
+.sr-filter{position:relative;flex:none;scroll-snap-align:start}
+.sr-filter select{appearance:none;-webkit-appearance:none;height:2.625rem;padding:0 2.25rem 0 1rem;border-radius:var(--r-pill);border:1px solid var(--line-strong);background:var(--surface-solid);font-size:.9rem;font-weight:600;color:var(--heading);cursor:pointer;max-width:14rem}
+.sr-filter .ph{position:absolute;right:.875rem;top:50%;transform:translateY(-50%);pointer-events:none;font-size:.85rem;color:var(--muted)}
+.sr-filter.is-active select,.sr-filter select:focus{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-fg);outline:0}
+.sr-results{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1rem;font-size:.875rem;color:var(--muted)}
+.sr-results strong{color:var(--heading)}
+.sr-sort{display:inline-flex;gap:.25rem;align-items:center}
+.sr-sort button{padding:.25rem .5rem;border-radius:.5rem;font-weight:600;color:var(--muted)}
+.sr-sort button[aria-pressed="true"]{color:var(--brand-fg);background:var(--brand-soft)}
+
+/* ---------- 58. FORM PARTS: choice pills · upload box · step footer · callout ---------- */
+.sr-pills{display:flex;flex-wrap:wrap;gap:.5rem}
+.sr-pill{position:relative}
+.sr-pill input{position:absolute;opacity:0;pointer-events:none}
+.sr-pill span{display:inline-flex;align-items:center;gap:.4rem;min-height:2.75rem;padding:.5rem 1.125rem;border-radius:var(--r-pill);border:1.5px solid var(--line-strong);background:var(--surface-solid);font-weight:600;font-size:.95rem;color:var(--heading);cursor:pointer;transition:border-color .15s,background .15s}
+.sr-pill input:checked + span{border-color:var(--brand);background:var(--brand-soft);color:var(--brand-fg)}
+.sr-pill input:checked + span::before{content:"✓";font-weight:800}
+.sr-pill input:focus-visible + span{outline:2px solid var(--brand);outline-offset:2px}
+.sr-upload{display:flex;align-items:center;gap:1rem;padding:1rem;border:2px dashed var(--line-strong);border-radius:1.125rem;background:var(--surface-2);cursor:pointer;transition:border-color .15s,background .15s}
+.sr-upload:hover,.sr-upload.is-drag{border-color:var(--brand);background:var(--brand-soft)}
+.sr-upload input{position:absolute;opacity:0;width:1px;height:1px}
+.sr-upload__thumb{width:4.5rem;height:4.5rem;flex:none;display:grid;place-items:center;border-radius:.875rem;background:var(--sunken);color:var(--muted);font-size:1.75rem;overflow:hidden}
+.sr-upload__thumb img{width:100%;height:100%;object-fit:cover}
+.sr-upload strong{display:block;color:var(--heading);font-size:.98rem}
+.sr-upload span{font-size:.82rem;color:var(--muted);line-height:1.45}
+.sr-step-foot{position:sticky;bottom:0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.75rem;padding:.875rem 1rem;padding-bottom:max(.875rem,env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--surface-solid)}
+.sr-step-foot__info{text-align:center;font-size:.84rem;color:var(--muted);white-space:nowrap}
+@media (max-width:380px){.sr-step-foot__info{display:none}.sr-step-foot{grid-template-columns:auto 1fr}.sr-step-foot .sr-btn--primary{justify-self:end}}
+.sr-callout{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.25rem .875rem;align-items:start;padding:1rem 1.125rem;border-radius:1.125rem;border:1px solid color-mix(in srgb,var(--tone,var(--brand)) 22%,var(--line));background:color-mix(in srgb,var(--tone,var(--brand)) 7%,var(--surface-solid))}
+.sr-callout > .sr-ic{grid-row:span 2;width:2.5rem;height:2.5rem}
+.sr-callout__t{font-weight:700;color:var(--heading);font-size:.95rem;line-height:1.35}
+.sr-callout__s{font-size:.86rem;color:var(--text);line-height:1.45}
+.sr-callout__a{grid-column:2;margin-top:.5rem;justify-self:start}
+@media (min-width:640px){.sr-callout{grid-template-columns:auto minmax(0,1fr) auto}.sr-callout__a{grid-column:3;grid-row:1/span 2;margin:0;align-self:center}}
+
+/* ---------- 59. DEBUG: add ?sr-debug to any URL to outline elements wider than the screen ---------- */
+.sr-debug-overflow{outline:3px solid #ef4444!important;outline-offset:-3px}
+
+/* ---------- 60. KPI strip responds to its OWN width (sidebar-safe) ---------- */
+.sr-kpis-wrap,.sr-page{container-type:inline-size}
+.sr-kpi{min-width:0}
+@container (max-width:560px){
+  .sr-kpis{grid-template-columns:minmax(0,1fr)!important}
+  .sr-kpi + .sr-kpi{border-left:0!important;border-top:1px solid var(--line)!important}
+  .sr-kpi{padding:1rem 1.125rem;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:1rem}
+  .sr-kpi__v{grid-row:span 2;margin:0;font-size:1.5rem!important}
+}
+
+/* =====================================================================
+   61. DREAMWORK STAT STRIP — the ONE layout for .sr-stat at every width
+   icon (glass square) · label + KES value · pill on the right · sparkle · soft circles
+   Works with or without .sr-stat__body. The icon is NEVER above the label.
+   ===================================================================== */
+.sr-stats,.sr-stats--row{grid-template-columns:minmax(0,1fr)!important;gap:.75rem!important}
+@media (min-width:1024px){.sr-stats--row{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+.sr-stat{container-type:inline-size;display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:1rem;row-gap:.1rem;
+  min-height:5.5rem;padding:1rem 1.125rem 1rem 1rem!important;border-radius:1.375rem!important;color:#fff;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 80%,#fff) 0%,color-mix(in srgb,var(--tone) 90%,#fff) 55%,var(--tone) 100%)!important;
+  box-shadow:0 14px 26px -20px var(--tone),inset 0 1px #ffffff40!important;border:0!important}
+.sr-stat::before{right:-2rem!important;top:-2.75rem!important;width:7.5rem!important;height:7.5rem!important;background:#ffffff24!important}
+.sr-stat::after{left:-1.75rem!important;bottom:-2.25rem!important;width:5rem!important;height:5rem!important;background:#00000012!important;
+  box-shadow:calc(100cqi - 1rem) .25rem 0 -.5rem #ffffff18}
+.sr-stat__icon{grid-column:1;grid-row:1/3;display:inline-flex!important;width:3rem!important;height:3rem!important;border-radius:.95rem!important;
+  background:#ffffff33!important;border:1px solid #ffffff40!important;box-shadow:inset 0 1px #ffffff55!important;color:#fff!important;--ic-fill:#fff;--ic-fill-op:1}
+.sr-stat__icon .sr-icon{font-size:1.45rem!important;color:#fff!important}
+.sr-stat__icon .sr-icon svg{filter:none!important}
+.sr-stat__body{grid-column:2;grid-row:1/3;min-width:0}
+.sr-stat > .sr-stat__label{grid-column:2;grid-row:1;align-self:end}
+.sr-stat > .sr-stat__value{grid-column:2;grid-row:2;align-self:start}
+.sr-stat__label{font-size:1.02rem!important;font-weight:700!important;opacity:1!important;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 2px #0000001a}
+.sr-stat__value{margin-top:.15rem;font-size:1.85rem!important;line-height:1.05!important;white-space:nowrap;text-shadow:0 1px 2px #0000001f}
+.sr-stat__value>small{font-size:.8rem!important;font-weight:600;opacity:.95;margin-right:.1rem}
+.sr-stat__hint{grid-column:3;grid-row:1/3;display:inline-flex!important;max-width:11rem;padding:.45rem .9rem!important;border-radius:999px;background:#ffffff33!important;
+  font-size:.84rem!important;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-stat__spark{display:block!important;position:absolute;top:.6rem;left:55%;font-size:.9rem;opacity:.8;z-index:1}
+.sr-stat .sr-stat__glass{display:none}
+@container (max-width:330px){.sr-stat__hint{max-width:7.5rem;font-size:.75rem!important;padding:.35rem .7rem!important}.sr-stat__spark{display:none!important}}
+@container (max-width:280px){.sr-stat__hint{display:none!important}.sr-stat__value{font-size:1.55rem!important}}
+html.dark .sr-stat{background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 72%,#1a1a1a) 0%,color-mix(in srgb,var(--tone) 82%,#1a1a1a) 100%)!important}
+
+/* DreamWork reward card: white, tinted corner wash, coin with halo ring, centred */
+.sr-reward{background:radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--tone) 14%,transparent),transparent 60%),var(--surface-solid)!important;
+  border:1px solid color-mix(in srgb,var(--tone) 22%,var(--line))!important;border-radius:1.375rem!important;padding:1rem .75rem 1.125rem!important}
+.sr-reward__coin{width:2.75rem!important;height:2.75rem!important;background:linear-gradient(145deg,color-mix(in srgb,var(--tone) 70%,#fff),var(--tone))!important;
+  box-shadow:0 0 0 .4rem color-mix(in srgb,var(--tone) 16%,transparent),0 10px 18px -10px var(--tone)!important;margin-top:.25rem}
+.sr-reward__coin .sr-icon{font-size:1.3rem!important}
+.sr-reward__label{margin-top:1rem!important;font-size:.95rem!important;font-weight:500!important}
+.sr-reward__value{font-size:1.45rem!important}
+.sr-reward__sub{font-size:.8rem!important}
+/* number always wins: the pill shrinks/ellipsizes first, the label never sizes the column */
+.sr-stat{grid-template-columns:auto minmax(min-content,1fr) minmax(0,auto)!important}
+.sr-stat__label{width:0;min-width:100%}
+.sr-stat__value{overflow:visible!important;text-overflow:clip!important}
+.sr-stat__hint{min-width:0;max-width:100%}
+
+/* =====================================================================
+   62. DREAMWORK EXACT PHONE SCALE (≤767px) — sizes measured from dreamwork.co.ke
+   screenshots on a 412px phone. Verified by tools/dw_measure.py. Do not enlarge.
+   ===================================================================== */
+@media (max-width:767px){
+  :root{--tabbar-h:3.45rem}
+  /* top bar */
+  .sr-topbar__bar{height:3.2rem!important;min-height:0!important;padding:0 .375rem 0 .7rem!important;border-radius:1.25rem!important}
+  .sr-topbar .sr-logo{gap:.6rem}
+  .sr-topbar .sr-logo__mark{width:1.75rem!important;height:1.75rem!important;border-radius:.55rem!important}
+  .sr-topbar .sr-logo__word{font-size:1rem!important}
+  .sr-topbar__actions{height:2.5rem!important;padding:0 .25rem!important;gap:.1rem!important}
+  .sr-topbar .sr-icon-btn{width:2.125rem!important;height:2.125rem!important;font-size:1.05rem!important}
+  .sr-topbar .sr-account .sr-avatar,.sr-topbar .sr-avatar{width:1.8rem!important;height:1.8rem!important;font-size:.72rem!important;border-radius:.55rem!important}
+  /* greeting */
+  .sr-greet{gap:.75rem!important}
+  .sr-greet__avatar{width:2.75rem!important;height:2.75rem!important;font-size:1.1rem!important}
+  .sr-greet__date{font-size:.84rem!important}
+  .sr-greet__hello{font-size:1.3rem!important;line-height:1.2!important}
+  /* balance ticket */
+  .sr-balance__actions .sr-btn{height:2.5rem!important;min-height:0!important;font-size:.94rem!important}
+  .sr-balance__label{font-size:.9rem!important}
+  .sr-balance__amount{font-size:2.3rem!important}
+  /* stat strips */
+  .sr-stat{min-height:5.1rem!important;padding:.7rem 1rem .7rem .9rem!important;column-gap:.875rem!important}
+  .sr-stat__icon{width:2.25rem!important;height:2.25rem!important;border-radius:.7rem!important}
+  .sr-stat__icon .sr-icon{font-size:1.1rem!important}
+  .sr-stat__label{font-size:1rem!important}
+  .sr-stat__value{font-size:1.5rem!important}
+  .sr-stat__value>small{font-size:.75rem!important}
+  .sr-stat__hint{height:1.75rem;padding:0 .8rem!important;align-items:center;font-size:.84rem!important}
+  /* quick actions */
+  .sr-quick__icon{width:3.25rem!important;height:3.25rem!important;border-radius:1rem!important}
+  .sr-quick__item{font-size:.8rem!important}
+  /* task tiles */
+  .sr-tile{padding:.55rem .6rem .55rem .75rem!important;column-gap:.8rem!important;min-height:0!important}
+  .sr-tile .sr-glyph{width:2.75rem!important;height:2.75rem!important;border-radius:.8rem!important}
+  .sr-tile__tag{font-size:.66rem!important}
+  .sr-tile__name{font-size:1.125rem!important;line-height:1.3!important}
+  .sr-tile__desc{font-size:.875rem!important}
+  .sr-tile__foot{padding:.3rem .3rem .3rem .6rem!important}
+  .sr-tile__v{font-size:1.06rem!important}
+  .sr-tile .sr-go{width:1.875rem!important;height:1.875rem!important;border-radius:.6rem!important}
+  /* reward cards */
+  .sr-reward-grid{gap:.8rem!important}
+  .sr-reward{padding:.9rem .6rem 1rem!important}
+  .sr-reward__coin{width:2.125rem!important;height:2.125rem!important;margin-top:.3rem!important}
+  .sr-reward__coin .sr-icon{font-size:1rem!important}
+  .sr-reward__label{margin-top:.85rem!important;font-size:1rem!important}
+  .sr-reward__value{font-size:1.25rem!important;margin-top:.2rem!important}
+  .sr-reward__sub{font-size:.875rem!important}
+  /* bottom bar */
+  .sr-tab{font-size:.72rem!important;gap:.1rem!important}
+  .sr-tab__icon{width:1.875rem!important;height:1.875rem!important;border-radius:.6rem!important;font-size:1.05rem!important}
+  .sr-tab--cta .sr-tab__icon{width:2.875rem!important;height:2.875rem!important;margin-top:-1.75rem!important;border-radius:1rem!important}
+  /* panels and rows */
+  .sr-panel__title{font-size:1rem!important}
+  .sr-row__title{font-size:.9rem!important}
+  .sr-row__meta{font-size:.8rem!important}
+  /* drawer */
+  .sr-drawer{width:15rem!important;max-width:80vw!important}
+  .sr-drawer .sr-rail__brand{height:3.4rem!important;min-height:0!important;padding:0 .75rem!important}
+  .sr-drawer .sr-side-profile{min-height:0!important;padding:.45rem .6rem!important;gap:.6rem!important;border-radius:1rem!important}
+  .sr-drawer .sr-side-profile .sr-avatar{width:2rem!important;height:2rem!important;font-size:.8rem!important}
+  .sr-drawer .sr-side-profile__name{font-size:.9rem!important}
+  .sr-drawer .sr-side-profile__meta{font-size:.8rem!important}
+  .sr-drawer .sr-nav-link{height:2.5rem!important;min-height:0!important;padding:0 .5rem!important;gap:.75rem!important}
+  .sr-drawer .sr-nav-link__icon{width:1.625rem!important;height:1.625rem!important;border-radius:.5rem!important;font-size:.95rem!important}
+  .sr-drawer .sr-nav-link__label{font-size:.9rem!important}
+  .sr-drawer .sr-nav-section{font-size:.66rem!important}
+  /* page hero / feature pages */
+  .sr-page-hero{padding:1rem 1.05rem!important}
+  .sr-page-hero .sr-glyph{width:2.75rem!important;height:2.75rem!important;border-radius:.85rem!important}
+  .sr-page-hero__kicker{font-size:.66rem!important}
+  .sr-page-hero__title{font-size:1.5rem!important;line-height:1.15!important}
+  .sr-page-hero__text{font-size:.9rem!important;margin-top:.5rem!important}
+  .sr-page-hero__top{gap:.85rem!important}
+  .sr-earn-card{padding:1rem!important}
+  .sr-earn-card__label{font-size:.875rem!important}
+  .sr-earn-card__value{font-size:1.3rem!important}
+  .sr-linkbox{height:2.3rem!important;min-height:0!important;padding:0 .2rem 0 .7rem!important}
+  .sr-linkbox .sr-btn{height:1.7rem!important;min-height:0!important;font-size:.9rem!important;padding:0 .7rem!important}
+  .sr-linkbox__url{font-size:.82rem!important}
+  /* auth */
+  .sr-auth__title{font-size:1.8rem!important}
+  .sr-auth__sub{font-size:.9rem!important}
+  .sr-label{font-size:.84rem!important}
+  .sr-input,.sr-select{height:2.55rem!important;min-height:0!important;font-size:.94rem!important}
+  .sr-auth__form .sr-btn--primary,.sr-auth__form .sr-btn--soft{height:2.7rem!important;min-height:0!important;font-size:.97rem!important}
+  .sr-auth__badge{display:flex!important;width:3.5rem!important;height:3.5rem!important;border-radius:1rem!important;font-size:1.5rem!important;margin-bottom:.9rem!important}
+  .sr-hint{font-size:.84rem!important}
+}
+@media (max-width:767px){
+  .sr-reward{padding:.7rem .6rem .75rem!important}
+  .sr-reward__label{margin-top:.7rem!important;line-height:1.3!important}
+  .sr-reward__value{line-height:1.2!important;margin-top:.15rem!important}
+  .sr-reward__sub{line-height:1.3!important;margin-top:.15rem!important}
+  .sr-drawer .sr-side-profile{padding:.3rem .55rem!important}
+  .sr-drawer .sr-side-profile__name,.sr-drawer .sr-side-profile__meta{line-height:1.3!important}
+}
+@media (max-width:767px){.sr-drawer .sr-side-profile{padding:.45rem .6rem!important}}
+
+/* ---------- 63. ACCOUNT MENU (DreamWork) — avatar pill top-right; Log out is COMPULSORY ---------- */
+#pop-account,.sr-popover--account{width:16rem;padding:.35rem;border-radius:1.25rem;background:var(--surface-solid)!important;backdrop-filter:none!important;border:1px solid var(--line);box-shadow:0 24px 48px -20px #2b16083d,0 4px 12px -6px #2b160814}
+.sr-menu-head{display:flex;align-items:center;gap:.7rem;padding:.6rem .6rem .75rem}
+.sr-menu-head__avatar{width:2rem;height:2rem;flex:none;display:grid;place-items:center;border-radius:.6rem;background:#2a1d17;color:#fff;font-size:.75rem;font-weight:700;box-shadow:0 3px 0 -1px var(--brand)}
+html.dark .sr-menu-head__avatar{background:#fff;color:#1a1210}
+.sr-menu-head__name{display:block;font-size:.97rem;font-weight:600;color:var(--heading);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr-menu-head__meta{display:block;font-size:.84rem;color:var(--muted);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#pop-account .sr-menu-item,.sr-popover--account .sr-menu-item{min-height:2.3rem;padding:.35rem .7rem;gap:.8rem;font-size:.94rem;font-weight:500;color:var(--heading)}
+#pop-account .sr-menu-item .ph,.sr-popover--account .sr-menu-item .ph{font-size:1rem;color:var(--muted)}
+#pop-account .sr-menu-item--danger,#pop-account .sr-menu-item--danger .ph,.sr-popover--account .sr-menu-item--danger,.sr-popover--account .sr-menu-item--danger .ph{color:#d9465f!important}
+#pop-account .sr-menu-sep{margin:.3rem .5rem}
+.sr-account{display:inline-flex;align-items:center;gap:.35rem;padding:.15rem .4rem .15rem .15rem;border-radius:.8rem}
+.sr-account[aria-expanded="true"]{background:var(--surface-solid);box-shadow:var(--sh-xs)}
+@media (max-width:767px){.sr-account__name{display:none!important}}
+/* form footer: helper/checkbox + submit; wraps, button full-width on phones */
+.sr-form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1rem;margin-top:1.5rem}
+.sr-form-foot > .sr-btn{margin-left:auto}
+@media (max-width:480px){.sr-form-foot > .sr-btn{flex:1 1 100%;margin:0}}
+/* account/notification menus must never be clipped by the bar */
+.sr-topbar,.sr-topbar__bar,.sr-topbar__actions{overflow:visible!important}
+.sr-topbar{z-index:55}
+@media (max-width:767px){.sr-tile__k{display:block!important;font-size:.62rem!important;letter-spacing:.14em}}
+
+/* ---------- 64. DREAMWORK TYPE SCALE (≤767px), pixel-calibrated from dreamwork.co.ke screenshots (412px phone) ---------- */
+@media (max-width:767px){
+  .sr-topbar .sr-logo__word{font-size:.88rem!important}
+  .sr-greet__date{font-size:.78rem!important}
+  .sr-greet__hello{font-size:1.24rem!important}
+  .sr-balance__actions .sr-btn{font-size:.875rem!important}
+  .sr-balance__label{font-size:.78rem!important}
+  .sr-balance__amount{font-size:2.12rem!important}
+  .sr-balance__amount small,.sr-balance__amount>span:first-child:not(:only-child){font-size:.82rem!important}
+  .sr-stat__label{font-size:.94rem!important}
+  .sr-stat__value{font-size:1.47rem!important}
+  .sr-stat__value>small{font-size:.75rem!important}
+  .sr-stat__hint{font-size:.78rem!important}
+  .sr-quick__item{font-size:.75rem!important}
+  .sr-tile__tag{font-size:.56rem!important}
+  .sr-tile__name{font-size:.94rem!important}
+  .sr-tile__desc{font-size:.69rem!important}
+  .sr-tile__k{font-size:.53rem!important}
+  .sr-tile__v{font-size:.94rem!important}
+  .sr-tile__v>small{font-size:.5rem!important}
+  .sr-reward__label{font-size:.78rem!important}
+  .sr-reward__value{font-size:1.14rem!important}
+  .sr-reward__sub{font-size:.69rem!important}
+  .sr-tab{font-size:.59rem!important}
+  .sr-panel__title{font-size:.91rem!important}
+  .sr-row__title{font-size:.81rem!important}
+  .sr-row__meta{font-size:.69rem!important}
+  .sr-drawer .sr-nav-link__label{font-size:.81rem!important}
+  .sr-drawer .sr-nav-section{font-size:.56rem!important}
+  .sr-drawer .sr-side-profile__name{font-size:.81rem!important}
+  .sr-drawer .sr-side-profile__meta{font-size:.72rem!important}
+  .sr-page-hero__kicker{font-size:.56rem!important}
+  .sr-page-hero__title{font-size:1.24rem!important}
+  .sr-page-hero__text{font-size:.78rem!important}
+  .sr-earn-card__label{font-size:.78rem!important}
+  .sr-earn-card__value{font-size:1.24rem!important}
+  .sr-auth__title{font-size:1.6rem!important}
+  .sr-auth__sub{font-size:.81rem!important}
+  .sr-label{font-size:.72rem!important}
+  .sr-input,.sr-select{font-size:.91rem!important}
+  .sr-auth__form .sr-btn--primary,.sr-auth__form .sr-btn--soft{font-size:.91rem!important}
+  .sr-hint{font-size:.78rem!important}
+  #pop-account .sr-menu-item{font-size:.81rem!important}
+  .sr-menu-head__name{font-size:.91rem!important}
+  .sr-menu-head__meta{font-size:.78rem!important}
+}
+@media (max-width:767px){
+  .sr-tile{padding-top:.86rem!important;padding-bottom:.86rem!important}
+  .sr-reward{padding-top:1.15rem!important;padding-bottom:1.2rem!important}
+  .sr-drawer .sr-side-profile{padding-top:.56rem!important;padding-bottom:.56rem!important}
+}
+@media (max-width:767px){
+  /* drawer: DreamWork row rhythm (40px pitch) and small logo */
+  .sr-drawer .sr-nav-link{margin-top:0!important}
+  .sr-drawer .sr-rail__body{padding:.5rem .75rem 1rem!important}
+  .sr-drawer .sr-logo__mark{width:1.75rem!important;height:1.75rem!important;border-radius:.55rem!important}
+  .sr-drawer .sr-logo__word{font-size:.88rem!important}
+  /* auth: centred logo above the card, DreamWork sizes */
+  .sr-auth__logo{align-self:center;margin:2.25rem auto 1.25rem!important;gap:.6rem}
+  .sr-auth__logo .sr-logo__mark{width:2rem!important;height:2rem!important;border-radius:.6rem!important}
+  .sr-auth__logo .sr-logo__word{font-size:.88rem!important}
+  .sr-auth__card .sr-link,.sr-label-row .sr-link{font-size:.78rem!important}
+  .sr-auth__card .sr-btn{font-size:.91rem!important}
+  .sr-auth__card .sr-check + span,.sr-auth__card label.sr-flex{font-size:.78rem!important}
+}
+@media (max-width:767px){
+  /* referral earnings card + levels (DreamWork) */
+  .sr-earn-card__top{flex-wrap:nowrap!important;align-items:flex-start!important;gap:.5rem!important}
+  .sr-earn-card__top > div{min-width:0}
+  .sr-earn-card .sr-glass-pill{flex:none;font-size:.65rem!important;padding:.25rem .6rem!important;white-space:nowrap}
+  .sr-earn-card__value{font-size:1.2rem!important}
+  .sr-linkbox__url{font-size:.69rem!important}
+  .sr-linkbox .sr-btn:not(.sr-btn--icon):not([aria-label]){background:var(--brand)!important;color:#fff!important;border-color:transparent!important;font-size:.81rem!important;box-shadow:0 6px 14px -8px #0006}
+  .sr-level-grid{grid-template-columns:minmax(0,1fr)!important;gap:.75rem!important}
+  .sr-level{padding:.7rem .9rem!important;min-height:0!important}
+  .sr-level__k{font-size:.75rem!important}
+  .sr-level__v{font-size:1.07rem!important;line-height:1.3!important;margin:.15rem 0!important}
+  .sr-level__s{font-size:.75rem!important}
+}

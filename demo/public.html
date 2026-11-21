@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jobs abroad · LUMADESK</title>
+<meta name="theme-color" content="#fbf8f5">
+<!-- 1. Fonts + icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<!-- 2. Kit -->
+<link rel="stylesheet" href="../kit/sunrise.css">
+<!-- 3. Admin theme (server prints the saved JSON here) + engine BEFORE body paints -->
+<script>window.SR_THEME = { preset: "ember", allowUserColors: true };</script>
+<script src="../kit/sunrise-theme.js"></script>
+</head>
+<body>
+<header class="sr-site-head"><div class="sr-site-head__bar">
+  <a href="#" class="sr-logo"><span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span><span class="sr-logo__word">LUMA<span>DESK</span></span></a>
+  <nav class="sr-site-head__nav"><a class="sr-site-head__link" href="#jobs" aria-current="page">Jobs</a><a class="sr-site-head__link" href="#cats">Categories</a><a class="sr-site-head__link" href="#apply">Apply</a></nav>
+  <div class="sr-site-head__right">
+    <button class="sr-icon-btn" data-sr-theme-toggle aria-label="Toggle dark mode"><i class="ph ph-moon"></i></button>
+    <a class="sr-site-head__signin" href="login.html">Sign in</a>
+    <a class="sr-btn sr-btn--primary sr-btn--sm sr-site-head__cta" href="register.html">Register</a>
+    <button class="sr-icon-btn sr-site-head__burger" data-sr-drawer-open aria-label="Open menu"><i class="ph ph-list"></i></button>
+  </div>
+</div></header>
+<div class="sr-scrim"></div>
+<aside class="sr-drawer" aria-label="Menu"><div class="sr-rail__brand"><a href="#" class="sr-logo"><span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span><span class="sr-logo__word">LUMA<span>DESK</span></span></a><button class="sr-icon-btn" style="margin-left:auto" data-sr-drawer-close aria-label="Close menu"><i class="ph ph-x"></i></button></div>
+  <nav class="sr-rail__body"><a href="#jobs" class="sr-nav-link tone-sky" data-sr-drawer-close><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="search-sparkle"></i></span><span class="sr-nav-link__label">Find jobs</span></a><a href="#cats" class="sr-nav-link tone-amber" data-sr-drawer-close><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="apps"></i></span><span class="sr-nav-link__label">Categories</span></a><a href="#apply" class="sr-nav-link tone-violet" data-sr-drawer-close><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="clipboard-task"></i></span><span class="sr-nav-link__label">Apply</span></a><a href="register.html" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="people-add"></i></span><span class="sr-nav-link__label">Register</span></a></nav></aside>
+
+<main class="sr-main" style="padding-bottom:3rem"><div class="sr-page">
+  <section id="jobs" class="sr-stack" style="gap:1rem">
+    <form class="sr-search" role="search" onsubmit="event.preventDefault()">
+      <label class="sr-search__field"><i class="ph ph-magnifying-glass"></i><input type="search" placeholder="Job title, keyword or company" aria-label="Keyword"></label>
+      <label class="sr-search__field"><i class="ph ph-map-pin"></i><select aria-label="Country"><option value="">Any destination country</option><option>Qatar</option><option>UAE</option><option>Canada</option><option>Poland</option></select></label>
+      <button class="sr-btn sr-btn--primary sr-btn--square sr-btn--lg sr-search__go">Find jobs</button>
+    </form>
+    <div class="sr-filter-row">
+      <label class="sr-filter is-active"><select aria-label="Category"><option value="">Category</option><option selected value="eng">Engineering</option><option>Caregiving</option><option>Security</option></select><i class="ph ph-caret-down"></i></label>
+      <label class="sr-filter"><select aria-label="Job type"><option value="">Job type</option><option>Full-time</option><option>Contract</option></select><i class="ph ph-caret-down"></i></label>
+      <label class="sr-filter"><select aria-label="Salary"><option value="">Salary</option><option>KES 50k+</option><option>KES 100k+</option></select><i class="ph ph-caret-down"></i></label>
+      <label class="sr-filter"><select aria-label="Posted"><option value="">Date posted</option><option>Last 7 days</option></select><i class="ph ph-caret-down"></i></label>
+    </div>
+    <div class="sr-results"><span><strong>All jobs</strong> · 0 results</span><span class="sr-sort">Sort: <button aria-pressed="true">Relevance</button><button aria-pressed="false">Date</button></span></div>
+    <div class="sr-panel"><div class="sr-empty"><span class="sr-ic sr-ic--lg tone-neutral"><i class="sr-icon" data-icon="search-sparkle"></i></span><p style="font-weight:700;color:var(--heading);font-size:1.05rem">No jobs match your search</p><p>Try another keyword or clear the filters.</p><button class="sr-btn sr-btn--soft sr-btn--sm">Clear filters</button></div></div>
+  </section>
+  <section id="cats"><div class="sr-head"><div><p class="sr-kicker">Browse</p><h2 class="sr-title">Job categories</h2></div><a class="sr-pill-link" href="#">All<i class="ph ph-arrow-right"></i></a></div><div class="sr-modules sr-modules--3"><a href="#jobs" class="sr-module tone-amber"><span class="sr-glyph"><i class="sr-icon" data-icon="coin-multiple"></i></span><div><p class="sr-module__k">Category</p><p class="sr-module__t">Finance &amp; Accounting</p><p class="sr-module__s">2 open jobs</p></div><span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a><a href="#jobs" class="sr-module tone-success"><span class="sr-glyph"><i class="sr-icon" data-icon="people"></i></span><div><p class="sr-module__k">Category</p><p class="sr-module__t">Caregiving</p><p class="sr-module__s">1 open job</p></div><span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a><a href="#jobs" class="sr-module tone-violet"><span class="sr-glyph"><i class="sr-icon" data-icon="shield-checkmark"></i></span><div><p class="sr-module__k">Category</p><p class="sr-module__t">Security</p><p class="sr-module__s">1 open job</p></div><span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a><a href="#jobs" class="sr-module tone-sky"><span class="sr-glyph"><i class="sr-icon" data-icon="globe"></i></span><div><p class="sr-module__k">Category</p><p class="sr-module__t">Agriculture</p><p class="sr-module__s">1 open job</p></div><span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a><a href="#jobs" class="sr-module tone-indigo"><span class="sr-glyph"><i class="sr-icon" data-icon="settings"></i></span><div><p class="sr-module__k">Category</p><p class="sr-module__t">Engineering</p><p class="sr-module__s">0 open jobs</p></div><span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a></div></section>
+  <section id="apply" class="sr-panel" style="max-width:40rem;width:100%;margin:0 auto">
+    <div class="sr-panel__head"><span class="sr-panel__icon"><i class="sr-icon" data-icon="clipboard-task"></i></span><div class="sr-grow"><h2 class="sr-panel__title">Apply</h2><p class="sr-hint">Step 2 of 4 · About you</p></div></div>
+    <div class="sr-panel__body sr-stack" style="gap:1.25rem">
+      <div class="sr-steps"><span class="sr-step is-done">Details</span><span class="sr-step is-current">About you</span><span class="sr-step">Documents</span><span class="sr-step">Review</span></div>
+      <div class="sr-field"><label class="sr-label" for="em">7. Email address <span style="color:#ef4444">*</span></label><div class="sr-input-group"><i class="ph ph-envelope-simple"></i><input id="em" class="sr-input" type="email" autocomplete="email" value="amina.k@example.com"></div></div>
+      <fieldset class="sr-field" style="border:0;padding:0;margin:0"><legend class="sr-label" style="margin-bottom:.5rem">8. Do you have a passport? <span style="color:#ef4444">*</span></legend><div class="sr-pills"><label class="sr-pill"><input type="radio" name="pp"><span>Yes, I have a passport</span></label><label class="sr-pill"><input type="radio" name="pp" checked><span>No, not yet</span></label></div></fieldset>
+      <div class="sr-field"><span class="sr-label">9. Recent passport-size photo <span style="color:#ef4444">*</span></span><label class="sr-upload"><input type="file" accept="image/jpeg,image/png,image/webp"><span class="sr-upload__thumb"><i class="ph ph-user-square"></i></span><div><strong>Tap to upload a photo</strong><span>Plain light background, face clearly visible. JPG, PNG or WEBP, up to 5 MB.</span></div></label></div>
+    </div>
+    <div class="sr-step-foot"><button class="sr-btn sr-btn--secondary sr-btn--square"><i class="ph ph-arrow-left"></i>Back</button><span class="sr-step-foot__info">Step 2 of 4</span><button class="sr-btn sr-btn--primary sr-btn--square">Continue<i class="ph ph-arrow-right"></i></button></div>
+  </section>
+  <p class="sr-hint" style="text-align:center;font-size:.9rem">Already registered? <a class="sr-link" href="login.html">Sign in</a> · Agent? <a class="sr-link" href="#">Become a partner</a></p>
+</div></main>
+<script src="../kit/sunrise-icons.js"></script>
+<script src="../kit/sunrise-ui.js"></script>
+</body>
+</html>

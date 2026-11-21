@@ -335,7 +335,7 @@ request succeeds show a toast "Check your phone". Never claim a payment succeede
 ```
 Grid: `sr-task-list` (1 column phones, 2 columns ≥900px).
 
-## 6e. Page hero, earnings card, levels (feature landing pages)
+## 6e. Page hero, earnings card, levels (in-app feature pages)
 
 - **Page hero:** `<header class="sr-page-hero tone-violet">` → `sr-page-hero__top` (`sr-glyph` icon + `sr-page-hero__kicker` + `sr-page-hero__title`) + `sr-page-hero__text` + optional large faint `sr-page-hero__art` icon. Start every feature page with one.
 - **Gradient earnings card:** `sr-earn-card` → `sr-earn-card__top` (label, `sr-earn-card__value`, `sr-glass-pill`) + `sr-linkbox` (truncated `sr-linkbox__url`, white Copy button with `data-sr-copy`, glass share icon button).
@@ -380,6 +380,80 @@ Reference: `demo/login.html`, `demo/register.html`, `demo/forgot.html`. Every pr
   divider + button replaced by one `sr-auth__alt` line (`sr-auth--compact-alt`).
 - **General compactness rule for every page:** primary action visible without scrolling on a 412×760 screen;
   forms ≤ 5 visible fields on phones (collapse optional ones); use `hidden` (the kit forces `[hidden]{display:none}`).
+
+## 6h. EXACT card markup — copy, never invent (v5)
+
+AI tools broke real sites by writing their own card markup. **Use these blocks exactly. Do not write custom CSS for cards.**
+
+**Stat strip** (DreamWork "Today / Withdrawn / Lifetime"; also admin counters). One horizontal row on every screen: glass icon on the left, label and value in the middle, pill on the right. **The icon is never above the label.**
+```html
+<section class="sr-stats sr-stats--row">
+  <div class="sr-stat tone-sky">
+    <span class="sr-stat__icon"><i class="sr-icon" data-icon="people"></i></span>
+    <div class="sr-stat__body"><p class="sr-stat__label">Candidates</p><p class="sr-stat__value"><small>KES</small>117,500</p></div>
+    <span class="sr-stat__hint">+4 this week</span>
+    <span class="sr-stat__spark">✦</span>
+  </div>
+</section>
+```
+**Reward card** (2-column grid: coin with halo, centred label, value, sub): see `.sr-reward-grid` in `demo/dashboard.html`.
+**Module row** (admin modules, categories; replaces big tiles in admin panels):
+```html
+<div class="sr-modules"><a href="#" class="sr-module tone-violet"><span class="sr-glyph"><i class="sr-icon" data-icon="person-key"></i></span>
+  <div><p class="sr-module__k">Officers, roles</p><p class="sr-module__t">Staff &amp; roles</p><p class="sr-module__s">5 active staff</p></div>
+  <span class="sr-module__go"><i class="ph ph-caret-right"></i></span></a></div>
+```
+**Page head with buttons** (never put buttons inside the title row yourself):
+```html
+<header class="sr-page-head tone-rose"><span class="sr-glyph"><i class="sr-icon" data-icon="people-community"></i></span>
+  <div><p class="sr-page-head__kicker">Partners</p><h1 class="sr-page-head__title">Partners &amp; commissions</h1></div>
+  <p class="sr-page-head__text">One-line description.</p>
+  <div class="sr-page-head__actions"><button class="sr-btn sr-btn--primary sr-btn--square">Add partner</button><button class="sr-btn sr-btn--secondary sr-btn--square">Rules</button></div></header>
+```
+**Numbers grid** (2×2 on phones, 4 across on desktop; numbers never wrap): `.sr-metrics.sr-metrics--4 > .sr-metric > .sr-metric__k + .sr-metric__v(<small>KES</small>3,950)`.
+**Callout with action**: `.sr-callout.tone-amber > .sr-ic + .sr-callout__t + .sr-callout__s + a.sr-btn.sr-callout__a`.
+**Public (logged-out) header**: `.sr-site-head > .sr-site-head__bar` with logo, `.sr-site-head__nav`, `.sr-site-head__right` (theme toggle, `.sr-site-head__signin`, `.sr-site-head__cta`, `.sr-site-head__burger`). See `demo/public.html`.
+**Search + filters**: `.sr-search` (stacked on phones, one bar on desktop) followed by `.sr-filter-row > label.sr-filter > select + i.ph-caret-down` (scrolls sideways on phones, never cut off).
+**Forms**: Yes/No choices use `.sr-pills > label.sr-pill > input[type=radio] + span`. File uploads use `label.sr-upload` (input, `.sr-upload__thumb`, text; preview is automatic). Multi-step forms end with `.sr-step-foot` (Back · Step 2 of 4 · Continue).
+
+## 6i. Known pitfalls (these caused real bugs — never do them)
+- Never set `position:relative` on every child of a button or card. It drags the tap ripple into the layout and cards jump on click. The kit already handles stacking.
+- Never write `.sr-stat{flex-direction:column}` or put the icon box above the stat label.
+- Never put huge background icons behind text. `.sr-tile__ghost` is pinned bottom-right at 7% opacity; leave it there.
+- Never put two buttons in the same flex row as a long title. Use `.sr-page-head__actions`, which drops below the title on phones.
+- Money and numbers (`KES 3,950`) must never break across lines. Use `.sr-stat__value`, `.sr-metric__v` or `.sr-money`, which are already nowrap.
+- Every flex or grid child that holds text needs `min-width:0`. Use `.sr-grow`.
+- Never make the topbar or tabbar more see-through than the kit's defaults.
+- Rows of selects or chips must scroll (`.sr-filter-row`) or wrap. They must never sit at fixed widths.
+- Test: open any page with `?sr-debug` in the URL. Anything wider than the screen is outlined red and a toast reports the count. Fix every one.
+
+## 6j. Account menu — Log out is COMPULSORY (every signed-in page)
+The top-right avatar pill opens the account menu. Every signed-in page must have it, and it must end with **Log out**. Never put this menu inside an element with `overflow:hidden`; the kit keeps the top bar `overflow:visible` for this.
+```html
+<button class="sr-account" data-sr-pop="pop-account" aria-label="Account menu" aria-expanded="false"><span class="sr-avatar sr-avatar--sm">DA</span><span class="sr-account__name">dalitech</span><i class="ph ph-caret-down sr-muted"></i></button>
+<div class="sr-popover sr-popover--account" id="pop-account" hidden>
+  <div class="sr-menu-head"><span class="sr-menu-head__avatar">DA</span><span class="sr-grow"><span class="sr-menu-head__name">dalitech</span><span class="sr-menu-head__meta">+254718308478</span></span></div>
+  <div class="sr-menu-sep"></div>
+  <a href="/profile" class="sr-menu-item"><i class="ph ph-user"></i>Profile &amp; security</a>
+  <a href="#" class="sr-menu-item" data-install><i class="ph ph-download-simple"></i>Install app</a>
+  <div class="sr-menu-sep"></div>
+  <form method="post" action="/logout"><button class="sr-menu-item sr-menu-item--danger"><i class="ph ph-sign-out"></i>Log out</button></form>
+</div>
+```
+Log out must be a POST (with your CSRF token) that ends the session server-side, then redirects to the login page.
+
+## 6k. DreamWork phone type scale (exact; do not enlarge)
+These sizes were measured from dreamwork.co.ke on a 412 px-wide phone and are built into `sunrise.css` (sections 62–64). Use the kit classes; never override font sizes on phones.
+| Text | px | Text | px |
+|---|---|---|---|
+| Top bar brand | 14 | Greeting / page title | 20 |
+| Greeting date, labels, hints | 12.5 | Balance amount | 34 |
+| Stat strip label / value | 15 / 23.5 | Task card kicker / title / sub | 9 / 15 / 11 |
+| Reward card label / value / sub | 12.5 / 18 / 11 | Menu, drawer and list rows | 13 |
+| Panel titles | 14.5 | Bottom bar labels | 9.5 |
+| Login title / subtitle / labels | 25.5 / 13 / 11.5 | Inputs and buttons | 14.5 |
+Element sizes: top bar 51, icon tiles 44, stat icon 36, bottom bar 55, drawer 240 wide with 40 px rows, inputs 41, auth buttons 43.
+**Verify:** `python3 tools/dw_measure.py <demo folder>` checks 65 measurements, and `python3 tools/qa.py <folder> <pages>` checks overflow, overlapping or cut-off text, and size changes on tap at 360/390/412/768/1440 px. Both must report 0.
 
 ## 7. Layout components (see demo pages for full markup)
 
@@ -440,6 +514,11 @@ Route::post('/admin/theme', function (Illuminate\Http\Request $r) {
 ---
 
 ## 10. Delivery checklist
+- [ ] Top-right avatar menu with **Log out** on every signed-in page (§6j)
+- [ ] Phone text sizes untouched from the kit scale (§6k); `dw_measure.py` → OFF: 0
+- [ ] Stat cards use the exact 6h markup (horizontal strip, never icon-on-top)
+- [ ] Page opened with `?sr-debug` at 360 px shows "No overflow"
+- [ ] Tapping any card or button does not change its size
 
 - [ ] Head order correct; duotone icon CSS loaded; `sunrise-ui.js` at end of body.
 - [ ] Same shell on every page, active nav + tab bar item set, breadcrumb title updated.
