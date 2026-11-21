@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Video Lessons · LUMADESK</title>
+<meta name="theme-color" content="#fbf8f5">
+<!-- 1. Fonts + icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<!-- 2. Kit -->
+<link rel="stylesheet" href="../kit/sunrise.css">
+<!-- 3. Admin theme (server prints the saved JSON here) + engine BEFORE body paints -->
+<script>window.SR_THEME = { preset: "ember", allowUserColors: true };</script>
+<script src="../kit/sunrise-theme.js"></script>
+</head>
+<body>
+<div class="sr-app">
+
+  <!-- ============ SIDEBAR RAIL (desktop) ============ -->
+  <aside class="sr-rail" aria-label="Main navigation">
+    <!--SIDEBAR-->
+    <div class="sr-rail__brand">
+      <a href="dashboard.html" class="sr-logo" aria-label="LUMADESK home">
+        <span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span>
+        <span class="sr-logo__word">LUMA<span>DESK</span></span>
+      </a>
+    </div>
+    <nav class="sr-rail__body">
+      <a href="dashboard.html" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="home"></i></span><span class="sr-nav-link__label">Home</span></a>
+      <div class="sr-nav-section">Earn</div>
+      <a href="#" class="sr-nav-link tone-indigo"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="star"></i></span><span class="sr-nav-link__label">App Reviews</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="building"></i></span><span class="sr-nav-link__label">Hotel Reviews</span></a>
+      <a href="#" class="sr-nav-link tone-sky"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="clipboard-task"></i></span><span class="sr-nav-link__label">Surveys</span></a>
+      <a href="pages.html" class="sr-nav-link is-active tone-rose" aria-current="page"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="video"></i></span><span class="sr-nav-link__label">Video Lessons</span><span class="sr-nav-link__badge">New</span></a>
+      <a href="#" class="sr-nav-link tone-violet"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="bot-sparkle"></i></span><span class="sr-nav-link__label">AI Training</span></a>
+      <a href="#" class="sr-nav-link tone-cyan"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="book-open-lightbulb"></i></span><span class="sr-nav-link__label">Content Writing</span></a>
+      <a href="#" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="chat-multiple"></i></span><span class="sr-nav-link__label">Messaging</span></a>
+      <a href="#" class="sr-nav-link tone-success"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="sport"></i></span><span class="sr-nav-link__label">Walk &amp; Earn</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="building-store"></i></span><span class="sr-nav-link__label">Digital Products</span></a>
+      <div class="sr-nav-section">Wallet</div>
+      <a href="#" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="savings"></i></span><span class="sr-nav-link__label">Withdraw</span></a>
+      <a href="transactions.html" class="sr-nav-link tone-sky"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="receipt"></i></span><span class="sr-nav-link__label">Transactions</span></a>
+      <div class="sr-nav-section">Community</div>
+      <a href="#" class="sr-nav-link tone-violet"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="people-community"></i></span><span class="sr-nav-link__label">Referrals</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="trophy"></i></span><span class="sr-nav-link__label">Leaderboard</span></a>
+      <div class="sr-nav-section">Admin</div>
+      <button type="button" class="sr-nav-link tone-rose" data-sr-studio-open style="width:100%"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="paint-brush"></i></span><span class="sr-nav-link__label" style="text-align:left">Theme studio</span></button>
+    </nav>
+    <div class="sr-rail__horizon"></div>
+    <div class="sr-rail__foot">
+      <a href="#" class="sr-side-profile">
+        <span class="sr-avatar">AM</span>
+        <span class="sr-grow"><span class="sr-side-profile__name" style="display:block">amina.k</span><span class="sr-side-profile__meta" style="display:block">+254 712 000 111</span></span>
+        <i class="ph ph-sliders-horizontal sr-muted"></i>
+      </a>
+    </div>
+    <!--/SIDEBAR-->
+  </aside>
+
+  <div class="sr-main-col">
+    <!-- ============ TOPBAR ============ -->
+    <header class="sr-topbar">
+      <div class="sr-topbar__bar">
+        <a href="dashboard.html" class="sr-logo sr-topbar__brand" aria-label="LUMADESK home">
+          <span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span>
+          <span class="sr-logo__word">LUMA<span>DESK</span></span>
+        </a>
+        <nav class="sr-crumb" aria-label="Breadcrumb">
+          <span class="sr-crumb__mark" aria-hidden="true"></span>
+          <span><span class="sr-crumb__root" style="display:block">Workspace</span><span class="sr-crumb__here" style="display:block">Video Lessons</span></span>
+        </nav>
+        <div class="sr-topbar__actions">
+          <div style="position:relative">
+            <button class="sr-icon-btn" data-sr-pop="pop-notes" aria-label="Notifications" aria-expanded="false"><i class="ph ph-bell"></i><span class="sr-icon-btn__dot"></span></button>
+            <div class="sr-popover" id="pop-notes" hidden style="width:19rem">
+              <div class="sr-flex" style="justify-content:space-between;padding:.375rem .5rem .625rem"><strong style="color:var(--heading)">Notifications</strong><button class="sr-pill-link" style="padding:.25rem .625rem;font-size:.7rem">Mark all read</button></div>
+              <div class="sr-menu-sep"></div>
+              <div class="sr-menu-item" style="align-items:flex-start"><span class="sr-row__icon tone-success" style="width:2rem;height:2rem"><i class="sr-icon" data-icon="checkmark-circle"></i></span><span><strong style="color:var(--heading);display:block">Payout sent</strong><span class="sr-hint">KES 1,250 reached your M-Pesa</span></span></div>
+              <div class="sr-menu-item" style="align-items:flex-start"><span class="sr-row__icon tone-violet" style="width:2rem;height:2rem"><i class="sr-icon" data-icon="add-starburst"></i></span><span><strong style="color:var(--heading);display:block">New lessons</strong><span class="sr-hint">4 videos added to your library</span></span></div>
+            </div>
+          </div>
+          <button class="sr-icon-btn" data-sr-theme-toggle aria-label="Toggle dark mode"><i class="ph ph-moon"></i></button>
+          <span class="sr-topbar__div" aria-hidden="true"></span>
+          <div style="position:relative">
+            <button class="sr-account" data-sr-pop="pop-account" aria-label="Account menu" aria-expanded="false"><span class="sr-avatar sr-avatar--sm">AM</span><span class="sr-account__name">amina.k</span><i class="ph ph-caret-down sr-muted"></i></button>
+            <div class="sr-popover" id="pop-account" hidden>
+              <div class="sr-flex" style="padding:.375rem .5rem .625rem;gap:.625rem"><span class="sr-avatar">AM</span><span class="sr-grow"><strong style="display:block;color:var(--heading)">amina.k</strong><span class="sr-hint">+254 712 000 111</span></span></div>
+              <div class="sr-menu-sep"></div>
+              <a href="#" class="sr-menu-item"><i class="ph ph-user"></i>Profile &amp; security</a>
+              <button class="sr-menu-item" data-sr-studio-open><i class="ph ph-palette"></i>Theme studio</button>
+              <a href="#" class="sr-menu-item"><i class="ph ph-download-simple"></i>Install app</a>
+              <div class="sr-menu-sep"></div>
+              <a href="login.html" class="sr-menu-item sr-menu-item--danger"><i class="ph ph-sign-out"></i>Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="sr-main">
+      <!--MAIN--><div class="sr-page">
+  <section class="sr-kpis">
+    <div class="sr-kpi"><p class="sr-kpi__k">Earned</p><p class="sr-money sr-kpi__v"><small>KES</small><span data-sr-count="780" data-decimals="2">780.00</span></p><p class="sr-kpi__s">From completed lessons</p></div>
+    <div class="sr-kpi"><p class="sr-kpi__k">Per lesson</p><p class="sr-money sr-kpi__v"><small>KES</small>50–150</p><p class="sr-kpi__s">Finish the quiz to claim</p></div>
+    <div class="sr-kpi"><p class="sr-kpi__k">Progress</p><div class="sr-flex" style="gap:1rem;margin-top:.5rem"><div class="sr-ring" style="--v:42"><span>42%</span></div><div><p class="sr-money" style="font-size:1.5rem">10<small>/ 24 lessons</small></p><p class="sr-kpi__s">Keep your streak going</p></div></div></div>
+  </section>
+  <section>
+    <div class="sr-head"><div><p class="sr-kicker">Watch &amp; learn</p><h2 class="sr-title">Skills library</h2></div>
+      <div class="sr-tabs sr-hide-mobile" role="tablist"><button class="sr-tabs__btn" role="tab" aria-selected="true">All</button><button class="sr-tabs__btn" role="tab" aria-selected="false">Office</button><button class="sr-tabs__btn" role="tab" aria-selected="false">Safety</button><span class="sr-tabs__ink"></span></div></div>
+    <div class="sr-media-grid"><article class="sr-media" data-sr-reveal data-sr-delay="0">
+        <div class="sr-media__thumb" style="background:linear-gradient(135deg,#2563eb,#22d3ee)"><i class="ph ph-envelope-simple" style="position:absolute;right:1rem;top:1rem;font-size:4.5rem;color:#ffffffa0;--ic-fill:#fff;--ic-fill-o:.3"></i><span class="sr-media__lock" style="background:var(--grad-brand)"><i class="ph ph-play"></i></span>
+          <div class="sr-media__chips"><span class="sr-chip"><i class="ph ph-clock"></i>6 min</span><span class="sr-chip sr-chip--brand">+KES 150</span></div></div>
+        <div class="sr-media__body"><h3 class="sr-media__title">Writing clear, polite work emails</h3><p class="sr-media__desc">Eight habits that make every email easier to answer.</p>
+          <button class="sr-btn sr-btn--primary sr-btn--square sr-btn--block"><i class="ph ph-play"></i>Start lesson</button></div>
+      </article>
+      <article class="sr-media" data-sr-reveal data-sr-delay="80">
+        <div class="sr-media__thumb" style="background:linear-gradient(135deg,#0f172a,#f43f5e)"><i class="ph ph-shield-warning" style="position:absolute;right:1rem;top:1rem;font-size:4.5rem;color:#ffffffa0;--ic-fill:#fff;--ic-fill-o:.3"></i><span class="sr-media__lock"><i class="ph ph-lock-simple"></i></span>
+          <div class="sr-media__chips"><span class="sr-chip"><i class="ph ph-clock"></i>6 min</span><span class="sr-chip sr-chip--brand">+KES 150</span></div></div>
+        <div class="sr-media__body"><h3 class="sr-media__title">Spotting fake job offers</h3><p class="sr-media__desc">The warning signs that a recruiter is not who they claim.</p>
+          <button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block" data-sr-unlock data-kind="Unlock video" data-title="Spotting fake job offers" data-fee="100" data-earn="150" data-icon="video"><i class="ph ph-lock-simple"></i>Unlock for KES 100</button></div>
+      </article>
+      <article class="sr-media" data-sr-reveal data-sr-delay="160">
+        <div class="sr-media__thumb" style="background:linear-gradient(135deg,#15803d,#facc15)"><i class="ph ph-table" style="position:absolute;right:1rem;top:1rem;font-size:4.5rem;color:#ffffffa0;--ic-fill:#fff;--ic-fill-o:.3"></i><span class="sr-media__lock"><i class="ph ph-lock-simple"></i></span>
+          <div class="sr-media__chips"><span class="sr-chip"><i class="ph ph-clock"></i>6 min</span><span class="sr-chip sr-chip--brand">+KES 150</span></div></div>
+        <div class="sr-media__body"><h3 class="sr-media__title">Spreadsheet basics in ten minutes</h3><p class="sr-media__desc">Rows, formulas and charts for complete beginners.</p>
+          <button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block" data-sr-unlock data-kind="Unlock video" data-title="Spreadsheet basics in ten minutes" data-fee="100" data-earn="150" data-icon="video"><i class="ph ph-lock-simple"></i>Unlock for KES 100</button></div>
+      </article>
+      <article class="sr-media" data-sr-reveal data-sr-delay="240">
+        <div class="sr-media__thumb" style="background:linear-gradient(135deg,#4f46e5,#f472b6)"><i class="ph ph-file-text" style="position:absolute;right:1rem;top:1rem;font-size:4.5rem;color:#ffffffa0;--ic-fill:#fff;--ic-fill-o:.3"></i><span class="sr-media__lock"><i class="ph ph-lock-simple"></i></span>
+          <div class="sr-media__chips"><span class="sr-chip"><i class="ph ph-clock"></i>6 min</span><span class="sr-chip sr-chip--brand">+KES 150</span></div></div>
+        <div class="sr-media__body"><h3 class="sr-media__title">Writing and sharing documents</h3><p class="sr-media__desc">Create, format and share a document with your team.</p>
+          <button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block" data-sr-unlock data-kind="Unlock video" data-title="Writing and sharing documents" data-fee="100" data-earn="150" data-icon="video"><i class="ph ph-lock-simple"></i>Unlock for KES 100</button></div>
+      </article>
+      </div>
+  </section>
+  <section>
+    <div class="sr-head"><div><p class="sr-kicker">AI training</p><h2 class="sr-title">Rate AI answers</h2></div><span class="sr-badge tone-violet">4 open</span></div>
+    <div class="sr-task-list"><article class="sr-task" data-sr-reveal data-sr-delay="0"><div class="sr-task__top"><span class="sr-ic tone-violet"><i class="sr-icon" data-icon="bot-sparkle"></i></span><div><p class="sr-task__cat">Helpfulness</p><p class="sr-task__time"><i class="ph ph-clock"></i>~20s</p></div><span class="sr-reward-pill">+KES 500</span></div><h3 class="sr-task__title">Does the answer stay on topic?</h3><p class="sr-task__text">Check whether the AI answered the question it was asked.</p><button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block sr-btn--lg" data-sr-unlock data-kind="Unlock task" data-title="Does the answer stay on topic?" data-fee="150" data-earn="500" data-icon="bot-sparkle"><i class="ph ph-lock-simple"></i>Unlock task · KES 150</button></article><article class="sr-task" data-sr-reveal data-sr-delay="70"><div class="sr-task__top"><span class="sr-ic tone-rose"><i class="sr-icon" data-icon="bot-sparkle"></i></span><div><p class="sr-task__cat">Safety</p><p class="sr-task__time"><i class="ph ph-clock"></i>~20s</p></div><span class="sr-reward-pill">+KES 500</span></div><h3 class="sr-task__title">Catch the fake loan text</h3><p class="sr-task__text">The AI judged an SMS loan offer. Did it get it right?</p><button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block sr-btn--lg" data-sr-unlock data-kind="Unlock task" data-title="Catch the fake loan text" data-fee="150" data-earn="500" data-icon="bot-sparkle"><i class="ph ph-lock-simple"></i>Unlock task · KES 150</button></article><article class="sr-task" data-sr-reveal data-sr-delay="140"><div class="sr-task__top"><span class="sr-ic tone-sky"><i class="sr-icon" data-icon="bot-sparkle"></i></span><div><p class="sr-task__cat">Accuracy</p><p class="sr-task__time"><i class="ph ph-clock"></i>~20s</p></div><span class="sr-reward-pill">+KES 500</span></div><h3 class="sr-task__title">Is the exchange rate correct?</h3><p class="sr-task__text">Compare the AI’s KES to USD answer with the source.</p><button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block sr-btn--lg" data-sr-unlock data-kind="Unlock task" data-title="Is the exchange rate correct?" data-fee="150" data-earn="500" data-icon="bot-sparkle"><i class="ph ph-lock-simple"></i>Unlock task · KES 150</button></article><article class="sr-task" data-sr-reveal data-sr-delay="210"><div class="sr-task__top"><span class="sr-ic tone-amber"><i class="sr-icon" data-icon="bot-sparkle"></i></span><div><p class="sr-task__cat">Safety</p><p class="sr-task__time"><i class="ph ph-clock"></i>~20s</p></div><span class="sr-reward-pill">+KES 500</span></div><h3 class="sr-task__title">Is this burn advice safe?</h3><p class="sr-task__text">Someone asked the AI about a kitchen burn. Is the advice sound?</p><button class="sr-btn sr-btn--outline sr-btn--square sr-btn--block sr-btn--lg" data-sr-unlock data-kind="Unlock task" data-title="Is this burn advice safe?" data-fee="150" data-earn="500" data-icon="bot-sparkle"><i class="ph ph-lock-simple"></i>Unlock task · KES 150</button></article></div>
+  </section>
+  <section class="sr-lock" data-sr-reveal>
+    <span class="sr-lock__icon"><i class="sr-icon" data-icon="book-open-lightbulb"></i><span class="sr-lock__badge"><i class="ph ph-lock-simple"></i></span></span>
+    <h2 class="sr-lock__title">Unlock Write &amp; Earn</h2>
+    <p class="sr-lock__text">One plan opens every writing brief. Write, upload your PDF and get paid for each piece that passes review.</p>
+    <div class="sr-fee"><span class="sr-flex"><i class="ph ph-shield-check"></i>Plan price</span><strong>KES 100</strong></div>
+    <button class="sr-btn sr-btn--primary sr-btn--lg sr-btn--block" onclick="SRButton.run(this,()=>new Promise(r=>setTimeout(r,1200)))"><i class="ph ph-sparkle"></i>Unlock Content Writing</button>
+  </section>
+  <section class="sr-stack" style="gap:1rem">
+    <header class="sr-page-hero tone-violet" data-sr-reveal><i class="ph ph-users-three sr-page-hero__art" aria-hidden="true"></i>
+      <div class="sr-page-hero__top"><span class="sr-glyph"><i class="sr-icon" data-icon="people-community"></i></span><div><p class="sr-page-hero__kicker">Community</p><h2 class="sr-page-hero__title">Referral Network</h2></div></div>
+      <p class="sr-page-hero__text">Share your link and earn a commission each time a friend activates.</p></header>
+    <div class="sr-earn-card" data-sr-reveal>
+      <div class="sr-earn-card__top"><div><p class="sr-earn-card__label">Referral earnings · 6 members</p><p class="sr-earn-card__value"><small>KES</small>1,500.00</p></div><span class="sr-glass-pill">KES 250 / activation</span></div>
+      <div class="sr-linkbox"><span class="sr-linkbox__url">https://lumadesk.app/join?ref=amina</span><button class="sr-btn sr-btn--sm" data-sr-copy="https://lumadesk.app/join?ref=amina"><i class="ph ph-copy"></i>Copy</button><button class="sr-btn sr-btn--icon" aria-label="Share"><i class="ph ph-share-network"></i></button></div>
+    </div>
+    <div class="sr-level-grid"><div class="sr-level tone-brand"><span class="sr-level__k">Level 1</span><span class="sr-level__v">6</span><span class="sr-level__s">4 active · KES 1,000</span></div><div class="sr-level tone-violet"><span class="sr-level__k">Level 2</span><span class="sr-level__v">11</span><span class="sr-level__s">7 active · KES 500</span></div></div>
+  </section>
+  <section class="sr-stack" style="max-width:46rem;width:100%;margin:0 auto">
+    <div class="sr-panel" data-sr-reveal><div class="sr-panel__body">
+      <div class="sr-profile"><span class="sr-avatar sr-avatar--lg sr-avatar--dark">AM</span><div><div class="sr-flex" style="flex-wrap:wrap"><strong style="font-family:var(--font-display);font-size:1.25rem;color:var(--heading)">amina.k</strong><span class="sr-badge tone-success sr-badge--dot">Active member</span></div><p class="sr-muted">+254 712 000 111</p></div></div>
+      <div class="sr-copybox"><div><p class="sr-copybox__k">Your referral code</p><p class="sr-copybox__v">AMINA24</p></div><button class="sr-btn sr-btn--secondary" data-sr-copy="AMINA24"><i class="ph ph-copy"></i>Copy code</button></div>
+      <dl class="sr-dl"><dt>Referred by</dt><dd>lumadesk</dd></dl>
+    </div></div>
+    <form class="sr-panel" data-sr-reveal onsubmit="event.preventDefault();SRButton.run(this.querySelector('[type=submit]'),()=>new Promise(r=>setTimeout(r,1000)))">
+      <div class="sr-panel__head"><span class="sr-panel__icon"><i class="sr-icon" data-icon="lock-closed"></i></span><h2 class="sr-panel__title">Security &amp; login</h2></div>
+      <div class="sr-panel__body">
+        <div class="sr-field"><label class="sr-label" for="p1">New password</label><input id="p1" class="sr-input" type="password" autocomplete="new-password"></div>
+        <div class="sr-field"><label class="sr-label" for="p2">Confirm new password</label><input id="p2" class="sr-input" type="password" placeholder="Re-enter new password"></div>
+        <div class="sr-field"><label class="sr-label" for="p3">Current password</label><input id="p3" class="sr-input" type="password"><span class="sr-hint">We ask for this to keep your account safe.</span></div>
+        <div class="sr-flex" style="justify-content:space-between;margin-top:1.5rem"><label class="sr-flex sr-hint"><input type="checkbox" class="sr-check" checked>Sign out other devices</label><button type="submit" class="sr-btn sr-btn--primary sr-btn--square"><i class="ph ph-check"></i>Save changes</button></div>
+      </div>
+    </form>
+  </section>
+</div><!--/MAIN-->
+    </main>
+  </div>
+</div>
+
+<!-- ============ MOBILE TAB BAR ============ -->
+<nav class="sr-tabbar" aria-label="Primary">
+  <a href="dashboard.html" class="sr-tab"><span class="sr-tab__icon"><i class="sr-icon" data-icon="home"></i></span>Home</a>
+  <a href="pages.html" class="sr-tab is-active" aria-current="page"><span class="sr-tab__icon"><i class="sr-icon" data-icon="add-starburst"></i></span>Earn</a>
+  <button class="sr-tab sr-tab--cta" data-sr-modal-open="withdraw"><span class="sr-tab__icon"><i class="sr-icon" data-icon="savings"></i></span>Withdraw</button>
+  <a href="transactions.html" class="sr-tab"><span class="sr-tab__icon"><i class="sr-icon" data-icon="receipt"></i></span>Activity</a>
+  <button class="sr-tab" data-sr-drawer-open><span class="sr-tab__icon"><i class="sr-icon" data-icon="apps"></i></span>Menu</button>
+</nav>
+
+<!-- ============ MOBILE DRAWER (same nav as rail) ============ -->
+<div class="sr-scrim"></div>
+<aside class="sr-drawer" aria-label="Menu"><!--DRAWER--></aside>
+
+
+<!-- ============ WITHDRAW MODAL → bottom sheet on phones ============ -->
+<div class="sr-modal" id="withdraw" hidden role="dialog" aria-modal="true" aria-labelledby="wd-title">
+  <form class="sr-modal__box" id="wd-form" novalidate>
+    <span class="sr-sheet-grab" aria-hidden="true"></span>
+    <div class="sr-modal__head"><span class="sr-ic sr-ic--solid tone-brand"><i class="sr-icon" data-icon="savings"></i></span><div class="sr-grow"><h2 class="sr-panel__title" id="wd-title">Withdraw to M-Pesa</h2><p class="sr-hint">Arrives in under 2 minutes</p></div><button type="button" class="sr-icon-btn" data-sr-modal-close aria-label="Close"><i class="ph ph-x"></i></button></div>
+    <div class="sr-modal__body">
+      <div class="sr-steps" style="margin-bottom:1.25rem"><span class="sr-step is-done">Amount</span><span class="sr-step is-current">Confirm</span><span class="sr-step">Sent</span></div>
+      <div class="sr-field"><label class="sr-label" for="wd-amt">Amount (KES)</label><div class="sr-input-group"><i class="ph ph-coins"></i><input id="wd-amt" class="sr-input" inputmode="decimal" placeholder="0.00"></div><span class="sr-error" id="wd-err" hidden><i class="ph ph-warning-circle"></i>Enter between KES 100 and 12,480</span></div>
+      <div class="sr-amount-chips" style="margin-top:.75rem"><button type="button" class="sr-chip-btn" data-amt="500">500</button><button type="button" class="sr-chip-btn" data-amt="1000">1,000</button><button type="button" class="sr-chip-btn" data-amt="5000">5,000</button><button type="button" class="sr-chip-btn" data-amt="12480.5">Max</button></div>
+      <div class="sr-field" style="margin-top:1.125rem"><span class="sr-label">Send to</span>
+        <label class="sr-choice"><input class="sr-check" type="radio" name="to" checked><span class="sr-ic tone-success" style="width:2.25rem;height:2.25rem;font-size:1rem"><i class="sr-icon" data-icon="phone"></i></span><span class="sr-grow"><strong style="color:var(--heading);display:block">M-Pesa · 0712 000 111</strong><span class="sr-hint">Default</span></span></label>
+        <label class="sr-choice"><input class="sr-check" type="radio" name="to"><span class="sr-ic tone-sky" style="width:2.25rem;height:2.25rem;font-size:1rem"><i class="sr-icon" data-icon="building-government"></i></span><span class="sr-grow"><strong style="color:var(--heading);display:block">Bank · Equity ••42</strong><span class="sr-hint">1 business day</span></span></label>
+      </div>
+    </div>
+    <div class="sr-modal__foot"><button type="button" class="sr-btn sr-btn--secondary sr-btn--square" data-sr-modal-close>Cancel</button><button type="submit" class="sr-btn sr-btn--primary sr-btn--square"><i class="ph ph-paper-plane-tilt"></i>Withdraw</button></div>
+  </form>
+</div>
+
+
+<!-- ============ PAY / UNLOCK SHEET (gradient hero + summary ticket) ============ -->
+<div class="sr-modal" id="unlock" hidden role="dialog" aria-modal="true" aria-labelledby="ul-title">
+  <form class="sr-modal__box sr-modal__box--hero" id="ul-form" novalidate>
+    <div class="sr-sheet-hero">
+      <span class="sr-sheet-grab" aria-hidden="true"></span>
+      <button type="button" class="sr-sheet-hero__close" data-sr-modal-close aria-label="Close"><i class="ph ph-x"></i></button>
+      <span class="sr-sheet-hero__icon"><i class="sr-icon" data-icon="video" id="ul-icon"></i></span>
+      <p class="sr-sheet-hero__kicker" id="ul-kicker">Unlock video</p>
+      <h2 class="sr-sheet-hero__title" id="ul-title">Spotting fake job offers</h2>
+      <p class="sr-sheet-hero__text" id="ul-text">Each item is unlocked on its own. Pay once, then collect its reward when you complete it.</p>
+    </div>
+    <div class="sr-sheet-body">
+      <div class="sr-summary">
+        <div class="sr-summary__row sr-summary__row--head"><span>Unlock fee</span><span class="sr-summary__big"><small>KES</small><span id="ul-fee">100</span></span></div>
+        <div class="sr-summary__row sr-summary__row--cut"><span>You earn</span><strong class="sr-plus" id="ul-earn">+KES 150</strong></div>
+        <div class="sr-summary__row"><span>Payment</span><strong>M-Pesa · One-time unlock</strong></div>
+      </div>
+      <div class="sr-field" style="margin-top:1.375rem"><label class="sr-field-label" for="ul-phone">M-Pesa number</label>
+        <div class="sr-input-group"><i class="ph ph-phone"></i><input id="ul-phone" class="sr-input sr-input--lg" inputmode="tel" autocomplete="tel" value="+254712000111"></div>
+        <span class="sr-error" id="ul-err" hidden><i class="ph ph-warning-circle"></i>Use a Safaricom number like 07XX XXX XXX</span></div>
+      <button type="submit" class="sr-btn sr-btn--primary sr-btn--xl sr-btn--block" style="margin-top:1.125rem"><i class="ph ph-sparkle"></i><span id="ul-cta">Pay KES 100 via M-Pesa</span></button>
+      <ol class="sr-howto"><li><span>1</span>Tap pay</li><li><span>2</span>Enter your PIN</li><li><span>3</span>Done</li></ol>
+    </div>
+  </form>
+</div>
+
+<script src="../kit/sunrise-icons.js"></script>
+<script src="../kit/sunrise-ui.js"></script>
+<script>
+  // Clone the rail into the drawer so nav is written once.
+  (function(){var r=document.querySelector('.sr-rail'),d=document.querySelector('.sr-drawer');if(r&&d&&!d.children.length){d.innerHTML=r.innerHTML;var b=d.querySelector('.sr-rail__brand'),f=d.querySelector('.sr-rail__foot');b.insertAdjacentHTML('beforeend','<button class="sr-icon-btn" style="margin-left:auto" data-sr-drawer-close aria-label="Close menu"><i class="ph ph-x"></i></button>');if(f)b.after(f);}})();
+  // Admin-only: wire the Theme Studio to your backend.
+  SRStudio.mount({ saveUrl: null /* e.g. '/admin/theme' */ });
+  // Pay / unlock sheet: <button data-sr-unlock data-title="…" data-kind="Unlock video" data-fee="100" data-earn="150" data-icon="video">
+  (function(){var f=document.getElementById('ul-form');if(!f)return;var $=function(i){return document.getElementById(i)};
+    document.addEventListener('click',function(e){var b=e.target.closest('[data-sr-unlock]');if(!b)return;
+      $('ul-title').textContent=b.dataset.title||'Unlock';$('ul-kicker').textContent=b.dataset.kind||'Unlock';
+      $('ul-fee').textContent=b.dataset.fee||'100';$('ul-earn').textContent='+KES '+(b.dataset.earn||'150');
+      $('ul-cta').textContent='Pay KES '+(b.dataset.fee||'100')+' via M-Pesa';
+      var ic=$('ul-icon');ic.setAttribute('data-icon',b.dataset.icon||'video');ic.removeAttribute('data-done');SRIcons.hydrate(ic.parentNode);
+      SRModal.open('unlock');});
+    f.addEventListener('submit',function(e){e.preventDefault();var p=$('ul-phone'),v=p.value.replace(/\s/g,''),btn=f.querySelector('[type=submit]');
+      if(!/^(\+?254|0)(7|1)\d{8}$/.test(v)){p.classList.add('is-invalid');$('ul-err').hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
+      p.classList.remove('is-invalid');$('ul-err').hidden=true;
+      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1300)})}).then(function(){setTimeout(function(){SRModal.close('unlock');SRToast.show({title:'Check your phone',text:'Enter your M-Pesa PIN to finish the payment',icon:'phone'});},800)});});
+  })();
+
+  // Demo wiring for the withdraw sheet
+  (function(){var f=document.getElementById('wd-form');if(!f)return;var inp=f.querySelector('#wd-amt'),err=f.querySelector('#wd-err');
+    f.addEventListener('click',function(e){var c=e.target.closest('[data-amt]');if(c){inp.value=c.dataset.amt;inp.classList.remove('is-invalid');err.hidden=true;}});
+    f.addEventListener('submit',function(e){e.preventDefault();var v=parseFloat(inp.value);var btn=f.querySelector('[type=submit]');
+      if(!(v>=100&&v<=12480.5)){inp.classList.add('is-invalid');err.hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
+      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1200)})}).then(function(){setTimeout(function(){SRModal.close('withdraw');SRToast.show({title:'Withdrawal requested',text:'KES '+v.toLocaleString()+' is on its way to M-Pesa',icon:'ph-check-circle'});f.reset();},900)});});
+  })();
+</script>
+</body>
+</html>

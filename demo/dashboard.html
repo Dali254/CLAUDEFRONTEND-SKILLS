@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Overview · LUMADESK</title>
+<meta name="theme-color" content="#fbf8f5">
+<!-- 1. Fonts + icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<!-- 2. Kit -->
+<link rel="stylesheet" href="../kit/sunrise.css">
+<!-- 3. Admin theme (server prints the saved JSON here) + engine BEFORE body paints -->
+<script>window.SR_THEME = { preset: "ember", allowUserColors: true };</script>
+<script src="../kit/sunrise-theme.js"></script>
+</head>
+<body>
+<div class="sr-app">
+
+  <!-- ============ SIDEBAR RAIL (desktop) ============ -->
+  <aside class="sr-rail" aria-label="Main navigation">
+    <!--SIDEBAR-->
+    <div class="sr-rail__brand">
+      <a href="dashboard.html" class="sr-logo" aria-label="LUMADESK home">
+        <span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span>
+        <span class="sr-logo__word">LUMA<span>DESK</span></span>
+      </a>
+    </div>
+    <nav class="sr-rail__body">
+      <a href="dashboard.html" class="sr-nav-link is-active tone-brand" aria-current="page"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="home"></i></span><span class="sr-nav-link__label">Home</span></a>
+      <div class="sr-nav-section">Earn</div>
+      <a href="#" class="sr-nav-link tone-indigo"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="star"></i></span><span class="sr-nav-link__label">App Reviews</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="building"></i></span><span class="sr-nav-link__label">Hotel Reviews</span></a>
+      <a href="#" class="sr-nav-link tone-sky"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="clipboard-task"></i></span><span class="sr-nav-link__label">Surveys</span></a>
+      <a href="pages.html" class="sr-nav-link tone-rose"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="video"></i></span><span class="sr-nav-link__label">Video Lessons</span><span class="sr-nav-link__badge">New</span></a>
+      <a href="#" class="sr-nav-link tone-violet"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="bot-sparkle"></i></span><span class="sr-nav-link__label">AI Training</span></a>
+      <a href="#" class="sr-nav-link tone-cyan"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="book-open-lightbulb"></i></span><span class="sr-nav-link__label">Content Writing</span></a>
+      <a href="#" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="chat-multiple"></i></span><span class="sr-nav-link__label">Messaging</span></a>
+      <a href="#" class="sr-nav-link tone-success"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="sport"></i></span><span class="sr-nav-link__label">Walk &amp; Earn</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="building-store"></i></span><span class="sr-nav-link__label">Digital Products</span></a>
+      <div class="sr-nav-section">Wallet</div>
+      <a href="#" class="sr-nav-link tone-brand"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="savings"></i></span><span class="sr-nav-link__label">Withdraw</span></a>
+      <a href="transactions.html" class="sr-nav-link tone-sky"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="receipt"></i></span><span class="sr-nav-link__label">Transactions</span></a>
+      <div class="sr-nav-section">Community</div>
+      <a href="#" class="sr-nav-link tone-violet"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="people-community"></i></span><span class="sr-nav-link__label">Referrals</span></a>
+      <a href="#" class="sr-nav-link tone-amber"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="trophy"></i></span><span class="sr-nav-link__label">Leaderboard</span></a>
+      <div class="sr-nav-section">Admin</div>
+      <button type="button" class="sr-nav-link tone-rose" data-sr-studio-open style="width:100%"><span class="sr-nav-link__icon"><i class="sr-icon" data-icon="paint-brush"></i></span><span class="sr-nav-link__label" style="text-align:left">Theme studio</span></button>
+    </nav>
+    <div class="sr-rail__horizon"></div>
+    <div class="sr-rail__foot">
+      <a href="#" class="sr-side-profile">
+        <span class="sr-avatar">AM</span>
+        <span class="sr-grow"><span class="sr-side-profile__name" style="display:block">amina.k</span><span class="sr-side-profile__meta" style="display:block">+254 712 000 111</span></span>
+        <i class="ph ph-sliders-horizontal sr-muted"></i>
+      </a>
+    </div>
+    <!--/SIDEBAR-->
+  </aside>
+
+  <div class="sr-main-col">
+    <!-- ============ TOPBAR ============ -->
+    <header class="sr-topbar">
+      <div class="sr-topbar__bar">
+        <a href="dashboard.html" class="sr-logo sr-topbar__brand" aria-label="LUMADESK home">
+          <span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span>
+          <span class="sr-logo__word">LUMA<span>DESK</span></span>
+        </a>
+        <nav class="sr-crumb" aria-label="Breadcrumb">
+          <span class="sr-crumb__mark" aria-hidden="true"></span>
+          <span><span class="sr-crumb__root" style="display:block">Workspace</span><span class="sr-crumb__here" style="display:block">Overview</span></span>
+        </nav>
+        <div class="sr-topbar__actions">
+          <div style="position:relative">
+            <button class="sr-icon-btn" data-sr-pop="pop-notes" aria-label="Notifications" aria-expanded="false"><i class="ph ph-bell"></i><span class="sr-icon-btn__dot"></span></button>
+            <div class="sr-popover" id="pop-notes" hidden style="width:19rem">
+              <div class="sr-flex" style="justify-content:space-between;padding:.375rem .5rem .625rem"><strong style="color:var(--heading)">Notifications</strong><button class="sr-pill-link" style="padding:.25rem .625rem;font-size:.7rem">Mark all read</button></div>
+              <div class="sr-menu-sep"></div>
+              <div class="sr-menu-item" style="align-items:flex-start"><span class="sr-row__icon tone-success" style="width:2rem;height:2rem"><i class="sr-icon" data-icon="checkmark-circle"></i></span><span><strong style="color:var(--heading);display:block">Payout sent</strong><span class="sr-hint">KES 1,250 reached your M-Pesa</span></span></div>
+              <div class="sr-menu-item" style="align-items:flex-start"><span class="sr-row__icon tone-violet" style="width:2rem;height:2rem"><i class="sr-icon" data-icon="add-starburst"></i></span><span><strong style="color:var(--heading);display:block">New lessons</strong><span class="sr-hint">4 videos added to your library</span></span></div>
+            </div>
+          </div>
+          <button class="sr-icon-btn" data-sr-theme-toggle aria-label="Toggle dark mode"><i class="ph ph-moon"></i></button>
+          <span class="sr-topbar__div" aria-hidden="true"></span>
+          <div style="position:relative">
+            <button class="sr-account" data-sr-pop="pop-account" aria-label="Account menu" aria-expanded="false"><span class="sr-avatar sr-avatar--sm">AM</span><span class="sr-account__name">amina.k</span><i class="ph ph-caret-down sr-muted"></i></button>
+            <div class="sr-popover" id="pop-account" hidden>
+              <div class="sr-flex" style="padding:.375rem .5rem .625rem;gap:.625rem"><span class="sr-avatar">AM</span><span class="sr-grow"><strong style="display:block;color:var(--heading)">amina.k</strong><span class="sr-hint">+254 712 000 111</span></span></div>
+              <div class="sr-menu-sep"></div>
+              <a href="#" class="sr-menu-item"><i class="ph ph-user"></i>Profile &amp; security</a>
+              <button class="sr-menu-item" data-sr-studio-open><i class="ph ph-palette"></i>Theme studio</button>
+              <a href="#" class="sr-menu-item"><i class="ph ph-download-simple"></i>Install app</a>
+              <div class="sr-menu-sep"></div>
+              <a href="login.html" class="sr-menu-item sr-menu-item--danger"><i class="ph ph-sign-out"></i>Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="sr-main">
+      <!--MAIN-->
+      <div class="sr-page">
+
+        <!-- Greeting -->
+        <header class="sr-greet">
+          <span class="sr-avatar sr-avatar--ring sr-greet__avatar" aria-hidden="true">A</span>
+          <div class="sr-grow">
+            <p class="sr-greet__date">Saturday, 21 November</p>
+            <h1 class="sr-greet__hello">Good afternoon, <span>amina.k</span></h1>
+          </div>
+          <a href="#" class="sr-pill-link sr-hide-sm"><i class="ph ph-arrows-left-right"></i>Transactions</a>
+        </header>
+
+        <!-- Balance ticket + solid stats -->
+        <section class="sr-top" aria-label="Your balance">
+          <div class="sr-balance">
+            <svg class="sr-balance__sun" viewBox="0 0 120 100" aria-hidden="true">
+              <defs><linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1"><stop style="stop-color:var(--brand-2)"/><stop offset=".6" style="stop-color:var(--brand)"/><stop offset="1" style="stop-color:var(--brand-3)"/></linearGradient></defs>
+              <path d="M14 70a46 46 0 0 1 92 0" fill="none" stroke="var(--brand)" stroke-opacity=".35" stroke-width="1.2" stroke-dasharray="1 5" stroke-linecap="round"/>
+              <path d="M24 70a36 36 0 0 1 72 0" fill="none" stroke="var(--brand)" stroke-opacity=".5" stroke-width="2"/>
+              <path d="M32 66a28 28 0 0 1 56 0z" fill="url(#sunG)"/>
+              <rect x="28" y="66" width="64" height="4" rx="2" fill="var(--brand)"/>
+              <rect x="38" y="76" width="44" height="3" rx="1.5" fill="var(--brand)" fill-opacity=".55"/>
+              <rect x="50" y="85" width="20" height="3" rx="1.5" fill="var(--brand)" fill-opacity=".3"/>
+              <path class="sr-balance__star" d="M100 18l2 5.5 5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2z" fill="var(--brand-2)"/>
+            </svg>
+            <div class="sr-balance__actions">
+              <button class="sr-btn sr-btn--primary" data-sr-modal-open="withdraw"><i class="ph ph-wallet"></i>Withdraw</button>
+              <button class="sr-btn sr-btn--soft" data-sr-copy="https://lumadesk.app/join?ref=amina"><i class="ph ph-share-network"></i>Invite</button>
+            </div>
+            <p class="sr-balance__label">Available balance</p>
+            <p class="sr-balance__amount"><small>KES</small><span data-sr-count="12480.50" data-decimals="2">12,480.50</span></p>
+            <div class="sr-balance__foot">
+              <span class="sr-badge tone-success sr-badge--dot">Verified account</span>
+              <span class="sr-badge tone-brand"><i class="ph ph-lightning"></i>Instant M-Pesa payouts</span>
+            </div>
+          </div>
+
+          <div class="sr-stats">
+            <div class="sr-stat tone-brand">
+              <span class="sr-stat__icon"><i class="sr-icon" data-icon="add-starburst"></i></span>
+              <div class="sr-stat__body"><p class="sr-stat__label">Today</p><p class="sr-stat__value"><small>KES</small><span data-sr-count="640" data-decimals="2">640.00</span></p></div>
+              <span class="sr-stat__hint">Earned today</span><i class="ph ph-plus sr-stat__spark"></i>
+            </div>
+            <div class="sr-stat tone-cyan">
+              <span class="sr-stat__icon"><i class="sr-icon" data-icon="coin-multiple"></i></span>
+              <div class="sr-stat__body"><p class="sr-stat__label">Withdrawn</p><p class="sr-stat__value"><small>KES</small><span data-sr-count="8200">8,200</span></p></div>
+              <span class="sr-stat__hint">6 payouts</span><i class="ph ph-plus sr-stat__spark"></i>
+            </div>
+            <div class="sr-stat tone-violet">
+              <span class="sr-stat__icon"><i class="sr-icon" data-icon="trophy"></i></span>
+              <div class="sr-stat__body"><p class="sr-stat__label">Lifetime</p><p class="sr-stat__value"><small>KES</small><span data-sr-count="20680">20,680</span></p></div>
+              <span class="sr-stat__hint">All-time confirmed</span><i class="ph ph-plus sr-stat__spark"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mobile quick actions -->
+        <nav class="sr-quick" aria-label="Shortcuts">
+          <button class="sr-quick__item tone-brand" data-sr-modal-open="withdraw"><span class="sr-quick__icon"><i class="sr-icon" data-icon="savings"></i></span>Withdraw</button>
+          <a href="#" class="sr-quick__item tone-violet"><span class="sr-quick__icon"><i class="sr-icon" data-icon="add-starburst"></i></span>Earn</a>
+          <a href="#" class="sr-quick__item tone-rose"><span class="sr-quick__icon"><i class="sr-icon" data-icon="people-add"></i></span>Invite</a>
+          <a href="#" class="sr-quick__item tone-cyan"><span class="sr-quick__icon"><i class="sr-icon" data-icon="history"></i></span>History</a>
+          <a href="#" class="sr-quick__item tone-amber"><span class="sr-quick__icon"><i class="sr-icon" data-icon="trophy"></i></span>Ranks</a>
+        </nav>
+
+        <!-- Feature tiles -->
+        <section>
+          <div class="sr-head">
+            <div><p class="sr-kicker">Pick a task</p><h2 class="sr-title">Start earning</h2></div>
+            <a href="#" class="sr-pill-link">See all<i class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="sr-tile-grid">
+            <a href="#" class="sr-tile tone-indigo" data-sr-reveal data-sr-delay="60">
+              <i class="sr-icon sr-tile__ghost" data-icon="star" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="star"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Rate &amp; review</p><p class="sr-tile__name">App Reviews</p><p class="sr-tile__desc">Up to KES 150 per review</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>1,050</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+            <a href="#" class="sr-tile tone-cyan" data-sr-reveal data-sr-delay="120">
+              <i class="sr-icon sr-tile__ghost" data-icon="sport" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="sport"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Step rewards</p><p class="sr-tile__name">Walk &amp; Earn</p><p class="sr-tile__desc">Per 1,000 steps</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>320</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+            <a href="#" class="sr-tile tone-brand" data-sr-reveal data-sr-delay="180">
+              <i class="sr-icon sr-tile__ghost" data-icon="chat-multiple" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="chat-multiple"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Instant reward</p><p class="sr-tile__name">Customer Messaging</p><p class="sr-tile__desc">Answer support chats</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>2,400</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+            <a href="#" class="sr-tile tone-rose" data-sr-reveal data-sr-delay="240">
+              <i class="sr-icon sr-tile__ghost" data-icon="video" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="video"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Watch &amp; learn</p><p class="sr-tile__name">Video Lessons</p><p class="sr-tile__desc">Short skills courses</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>780</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+            <a href="#" class="sr-tile tone-amber" data-sr-reveal data-sr-delay="300">
+              <i class="sr-icon sr-tile__ghost" data-icon="building" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="building"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Hospitality</p><p class="sr-tile__name">Hotel Reviews</p><p class="sr-tile__desc">Rate verified stays</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>0.00</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+            <a href="#" class="sr-tile tone-success" data-sr-reveal data-sr-delay="0">
+              <i class="sr-icon sr-tile__ghost" data-icon="trend-up" aria-hidden="true"></i>
+              <span class="sr-glyph"><i class="sr-icon" data-icon="trend-up"></i></span>
+              <div style="min-width:0"><p class="sr-tile__tag">Insights</p><p class="sr-tile__name">Market Reports</p><p class="sr-tile__desc">Weekly research briefs</p></div>
+              <div class="sr-tile__foot"><div><p class="sr-tile__k">Earned</p><p class="sr-tile__v"><small>KES</small>0.00</p></div><span class="sr-go"><i class="ph ph-arrow-up-right"></i></span></div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Reward coins -->
+        <section>
+          <div class="sr-head">
+            <div><p class="sr-kicker">Bonuses &amp; commissions</p><h2 class="sr-title">Your rewards</h2></div>
+            <a href="#" class="sr-pill-link">Referral hub<i class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="sr-reward-grid">
+            <a href="#" class="sr-reward tone-brand" data-sr-reveal data-sr-delay="60"><span class="sr-reward__coin"><i class="sr-icon" data-icon="people-community"></i></span><p class="sr-reward__label">Referral rewards</p><p class="sr-money sr-reward__value"><small>KES</small>1,500</p><p class="sr-reward__sub">6 direct referrals</p></a>
+            <a href="#" class="sr-reward tone-violet" data-sr-reveal data-sr-delay="120"><span class="sr-reward__coin"><i class="sr-icon" data-icon="gift"></i></span><p class="sr-reward__label">Team bonus</p><p class="sr-money sr-reward__value"><small>KES</small>420</p><p class="sr-reward__sub">Tier commissions</p></a>
+            <a href="#" class="sr-reward tone-amber" data-sr-reveal data-sr-delay="180"><span class="sr-reward__coin"><i class="sr-icon" data-icon="ribbon-star"></i></span><p class="sr-reward__label">Streak bonus</p><p class="sr-money sr-reward__value"><small>KES</small>200</p><p class="sr-reward__sub">7-day streak</p></a>
+            <a href="#" class="sr-reward tone-cyan" data-sr-reveal data-sr-delay="240"><span class="sr-reward__coin"><i class="sr-icon" data-icon="book-open-lightbulb"></i></span><p class="sr-reward__label">Course bonus</p><p class="sr-money sr-reward__value"><small>KES</small>0.00</p><p class="sr-reward__sub">Finish 3 lessons</p></a>
+            <a href="#" class="sr-reward tone-indigo" data-sr-reveal data-sr-delay="300"><span class="sr-reward__coin"><i class="sr-icon" data-icon="certificate"></i></span><p class="sr-reward__label">Quality bonus</p><p class="sr-money sr-reward__value"><small>KES</small>90</p><p class="sr-reward__sub">Top-rated work</p></a>
+            <a href="#" class="sr-reward tone-rose" data-sr-reveal data-sr-delay="0"><span class="sr-reward__coin"><i class="sr-icon" data-icon="building-store"></i></span><p class="sr-reward__label">Product sales</p><p class="sr-money sr-reward__value"><small>KES</small>0.00</p><p class="sr-reward__sub">Marketplace</p></a>
+          </div>
+        </section>
+
+        <!-- Activity -->
+        <section class="sr-panel">
+          <div class="sr-panel__head">
+            <span class="sr-panel__icon"><i class="sr-icon" data-icon="history"></i></span>
+            <h2 class="sr-panel__title">Latest activity</h2>
+            <a href="#" class="sr-pill-link sr-ml-auto">View all<i class="ph ph-arrow-right"></i></a>
+          </div>
+          <div>
+            <div class="sr-row"><span class="sr-row__icon tone-success"><i class="sr-icon" data-icon="coin-multiple"></i></span><div class="sr-grow"><p class="sr-row__title">App review approved</p><p class="sr-row__meta">Today, 14:12</p></div><span class="sr-amount is-in">+KES 150.00</span></div>
+            <div class="sr-row"><span class="sr-row__icon tone-rose"><i class="sr-icon" data-icon="send"></i></span><div class="sr-grow"><p class="sr-row__title">Withdrawal to M-Pesa</p><p class="sr-row__meta">Today, 09:40</p></div><span class="sr-amount is-out">-KES 1,250.00</span></div>
+            <div class="sr-row"><span class="sr-row__icon tone-violet"><i class="sr-icon" data-icon="people-add"></i></span><div class="sr-grow"><p class="sr-row__title">Referral bonus · joseph.m</p><p class="sr-row__meta">Yesterday, 18:05</p></div><span class="sr-amount is-in">+KES 250.00</span></div>
+          </div>
+        </section>
+
+      </div>
+      <!--/MAIN-->
+    </main>
+  </div>
+</div>
+
+<!-- ============ MOBILE TAB BAR ============ -->
+<nav class="sr-tabbar" aria-label="Primary">
+  <a href="#" class="sr-tab is-active" aria-current="page"><span class="sr-tab__icon"><i class="sr-icon" data-icon="home"></i></span>Home</a>
+  <a href="pages.html" class="sr-tab"><span class="sr-tab__icon"><i class="sr-icon" data-icon="add-starburst"></i></span>Earn</a>
+  <button class="sr-tab sr-tab--cta" data-sr-modal-open="withdraw"><span class="sr-tab__icon"><i class="sr-icon" data-icon="savings"></i></span>Withdraw</button>
+  <a href="transactions.html" class="sr-tab"><span class="sr-tab__icon"><i class="sr-icon" data-icon="receipt"></i></span>Activity</a>
+  <button class="sr-tab" data-sr-drawer-open><span class="sr-tab__icon"><i class="sr-icon" data-icon="apps"></i></span>Menu</button>
+</nav>
+
+<!-- ============ MOBILE DRAWER (same nav as rail) ============ -->
+<div class="sr-scrim"></div>
+<aside class="sr-drawer" aria-label="Menu"><!--DRAWER--></aside>
+
+
+<!-- ============ WITHDRAW MODAL → bottom sheet on phones ============ -->
+<div class="sr-modal" id="withdraw" hidden role="dialog" aria-modal="true" aria-labelledby="wd-title">
+  <form class="sr-modal__box" id="wd-form" novalidate>
+    <span class="sr-sheet-grab" aria-hidden="true"></span>
+    <div class="sr-modal__head"><span class="sr-ic sr-ic--solid tone-brand"><i class="sr-icon" data-icon="savings"></i></span><div class="sr-grow"><h2 class="sr-panel__title" id="wd-title">Withdraw to M-Pesa</h2><p class="sr-hint">Arrives in under 2 minutes</p></div><button type="button" class="sr-icon-btn" data-sr-modal-close aria-label="Close"><i class="ph ph-x"></i></button></div>
+    <div class="sr-modal__body">
+      <div class="sr-steps" style="margin-bottom:1.25rem"><span class="sr-step is-done">Amount</span><span class="sr-step is-current">Confirm</span><span class="sr-step">Sent</span></div>
+      <div class="sr-field"><label class="sr-label" for="wd-amt">Amount (KES)</label><div class="sr-input-group"><i class="ph ph-coins"></i><input id="wd-amt" class="sr-input" inputmode="decimal" placeholder="0.00"></div><span class="sr-error" id="wd-err" hidden><i class="ph ph-warning-circle"></i>Enter between KES 100 and 12,480</span></div>
+      <div class="sr-amount-chips" style="margin-top:.75rem"><button type="button" class="sr-chip-btn" data-amt="500">500</button><button type="button" class="sr-chip-btn" data-amt="1000">1,000</button><button type="button" class="sr-chip-btn" data-amt="5000">5,000</button><button type="button" class="sr-chip-btn" data-amt="12480.5">Max</button></div>
+      <div class="sr-field" style="margin-top:1.125rem"><span class="sr-label">Send to</span>
+        <label class="sr-choice"><input class="sr-check" type="radio" name="to" checked><span class="sr-ic tone-success" style="width:2.25rem;height:2.25rem;font-size:1rem"><i class="sr-icon" data-icon="phone"></i></span><span class="sr-grow"><strong style="color:var(--heading);display:block">M-Pesa · 0712 000 111</strong><span class="sr-hint">Default</span></span></label>
+        <label class="sr-choice"><input class="sr-check" type="radio" name="to"><span class="sr-ic tone-sky" style="width:2.25rem;height:2.25rem;font-size:1rem"><i class="sr-icon" data-icon="building-government"></i></span><span class="sr-grow"><strong style="color:var(--heading);display:block">Bank · Equity ••42</strong><span class="sr-hint">1 business day</span></span></label>
+      </div>
+    </div>
+    <div class="sr-modal__foot"><button type="button" class="sr-btn sr-btn--secondary sr-btn--square" data-sr-modal-close>Cancel</button><button type="submit" class="sr-btn sr-btn--primary sr-btn--square"><i class="ph ph-paper-plane-tilt"></i>Withdraw</button></div>
+  </form>
+</div>
+
+
+<!-- ============ PAY / UNLOCK SHEET (gradient hero + summary ticket) ============ -->
+<div class="sr-modal" id="unlock" hidden role="dialog" aria-modal="true" aria-labelledby="ul-title">
+  <form class="sr-modal__box sr-modal__box--hero" id="ul-form" novalidate>
+    <div class="sr-sheet-hero">
+      <span class="sr-sheet-grab" aria-hidden="true"></span>
+      <button type="button" class="sr-sheet-hero__close" data-sr-modal-close aria-label="Close"><i class="ph ph-x"></i></button>
+      <span class="sr-sheet-hero__icon"><i class="sr-icon" data-icon="video" id="ul-icon"></i></span>
+      <p class="sr-sheet-hero__kicker" id="ul-kicker">Unlock video</p>
+      <h2 class="sr-sheet-hero__title" id="ul-title">Spotting fake job offers</h2>
+      <p class="sr-sheet-hero__text" id="ul-text">Each item is unlocked on its own. Pay once, then collect its reward when you complete it.</p>
+    </div>
+    <div class="sr-sheet-body">
+      <div class="sr-summary">
+        <div class="sr-summary__row sr-summary__row--head"><span>Unlock fee</span><span class="sr-summary__big"><small>KES</small><span id="ul-fee">100</span></span></div>
+        <div class="sr-summary__row sr-summary__row--cut"><span>You earn</span><strong class="sr-plus" id="ul-earn">+KES 150</strong></div>
+        <div class="sr-summary__row"><span>Payment</span><strong>M-Pesa · One-time unlock</strong></div>
+      </div>
+      <div class="sr-field" style="margin-top:1.375rem"><label class="sr-field-label" for="ul-phone">M-Pesa number</label>
+        <div class="sr-input-group"><i class="ph ph-phone"></i><input id="ul-phone" class="sr-input sr-input--lg" inputmode="tel" autocomplete="tel" value="+254712000111"></div>
+        <span class="sr-error" id="ul-err" hidden><i class="ph ph-warning-circle"></i>Use a Safaricom number like 07XX XXX XXX</span></div>
+      <button type="submit" class="sr-btn sr-btn--primary sr-btn--xl sr-btn--block" style="margin-top:1.125rem"><i class="ph ph-sparkle"></i><span id="ul-cta">Pay KES 100 via M-Pesa</span></button>
+      <ol class="sr-howto"><li><span>1</span>Tap pay</li><li><span>2</span>Enter your PIN</li><li><span>3</span>Done</li></ol>
+    </div>
+  </form>
+</div>
+
+<script src="../kit/sunrise-icons.js"></script>
+<script src="../kit/sunrise-ui.js"></script>
+<script>
+  // Clone the rail into the drawer so nav is written once.
+  (function(){var r=document.querySelector('.sr-rail'),d=document.querySelector('.sr-drawer');if(r&&d&&!d.children.length){d.innerHTML=r.innerHTML;var b=d.querySelector('.sr-rail__brand'),f=d.querySelector('.sr-rail__foot');b.insertAdjacentHTML('beforeend','<button class="sr-icon-btn" style="margin-left:auto" data-sr-drawer-close aria-label="Close menu"><i class="ph ph-x"></i></button>');if(f)b.after(f);}})();
+  // Admin-only: wire the Theme Studio to your backend.
+  SRStudio.mount({ saveUrl: null /* e.g. '/admin/theme' */ });
+  // Pay / unlock sheet: <button data-sr-unlock data-title="…" data-kind="Unlock video" data-fee="100" data-earn="150" data-icon="video">
+  (function(){var f=document.getElementById('ul-form');if(!f)return;var $=function(i){return document.getElementById(i)};
+    document.addEventListener('click',function(e){var b=e.target.closest('[data-sr-unlock]');if(!b)return;
+      $('ul-title').textContent=b.dataset.title||'Unlock';$('ul-kicker').textContent=b.dataset.kind||'Unlock';
+      $('ul-fee').textContent=b.dataset.fee||'100';$('ul-earn').textContent='+KES '+(b.dataset.earn||'150');
+      $('ul-cta').textContent='Pay KES '+(b.dataset.fee||'100')+' via M-Pesa';
+      var ic=$('ul-icon');ic.setAttribute('data-icon',b.dataset.icon||'video');ic.removeAttribute('data-done');SRIcons.hydrate(ic.parentNode);
+      SRModal.open('unlock');});
+    f.addEventListener('submit',function(e){e.preventDefault();var p=$('ul-phone'),v=p.value.replace(/\s/g,''),btn=f.querySelector('[type=submit]');
+      if(!/^(\+?254|0)(7|1)\d{8}$/.test(v)){p.classList.add('is-invalid');$('ul-err').hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
+      p.classList.remove('is-invalid');$('ul-err').hidden=true;
+      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1300)})}).then(function(){setTimeout(function(){SRModal.close('unlock');SRToast.show({title:'Check your phone',text:'Enter your M-Pesa PIN to finish the payment',icon:'phone'});},800)});});
+  })();
+
+  // Demo wiring for the withdraw sheet
+  (function(){var f=document.getElementById('wd-form');if(!f)return;var inp=f.querySelector('#wd-amt'),err=f.querySelector('#wd-err');
+    f.addEventListener('click',function(e){var c=e.target.closest('[data-amt]');if(c){inp.value=c.dataset.amt;inp.classList.remove('is-invalid');err.hidden=true;}});
+    f.addEventListener('submit',function(e){e.preventDefault();var v=parseFloat(inp.value);var btn=f.querySelector('[type=submit]');
+      if(!(v>=100&&v<=12480.5)){inp.classList.add('is-invalid');err.hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
+      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1200)})}).then(function(){setTimeout(function(){SRModal.close('withdraw');SRToast.show({title:'Withdrawal requested',text:'KES '+v.toLocaleString()+' is on its way to M-Pesa',icon:'ph-check-circle'});f.reset();},900)});});
+  })();
+</script>
+</body>
+</html>
