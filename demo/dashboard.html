@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Overview · LUMADESK</title>
 <meta name="theme-color" content="#fbf8f5">
 <!-- 1. Fonts + icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="../kit/sunrise-fonts.css">
+<link rel="stylesheet" href="../kit/vendor/phosphor/phosphor.css">
 <!-- 2. Kit -->
 <link rel="stylesheet" href="../kit/sunrise.css">
 <!-- 3. Admin theme (server prints the saved JSON here) + engine BEFORE body paints -->
-<script>window.SR_THEME = { preset: "ember", allowUserColors: true };</script>
+<link rel="icon" href="data:,">
+<meta name="sr-theme" content='{"preset":"ember","allowUserColors":true}'>
 <script src="../kit/sunrise-theme.js"></script>
 </head>
-<body>
+<body data-sr-nav-progress>
+<div class="sr-preloader" data-sr-preloader role="status" aria-label="Loading"><div class="sr-preloader__inner"><span class="sr-preloader__mark"><span class="sr-logo__mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="sr-logo__sun" d="M18 40.5a14 14 0 0 1 28 0z" fill="#fff"/><rect x="12" y="39.5" width="40" height="3" rx="1.5" fill="#fff"/><rect x="20" y="46.5" width="24" height="2.5" rx="1.25" fill="#fff" fill-opacity=".6"/><rect x="26.5" y="52.5" width="11" height="2.5" rx="1.25" fill="#fff" fill-opacity=".3"/><path class="sr-logo__star" d="M46.5 12.5l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z" fill="#fff"/></svg></span></span><span class="sr-preloader__word">LUMA<span>DESK</span></span></div></div>
 <div class="sr-app">
 
   <!-- ============ SIDEBAR RAIL (desktop) ============ -->
@@ -294,7 +296,7 @@
     </div>
     <div class="sr-sheet-body">
       <div class="sr-summary">
-        <div class="sr-summary__row sr-summary__row--head"><span>Unlock fee</span><span class="sr-summary__big"><small>KES</small><span id="ul-fee">100</span></span></div>
+        <div class="sr-summary__row sr-summary__row--head"><span>Unlock stage</span><span class="sr-summary__big"><small>KES</small><span id="ul-fee">100</span></span></div>
         <div class="sr-summary__row sr-summary__row--cut"><span>You earn</span><strong class="sr-plus" id="ul-earn">+KES 150</strong></div>
         <div class="sr-summary__row"><span>Payment</span><strong>M-Pesa · One-time unlock</strong></div>
       </div>
@@ -309,32 +311,6 @@
 
 <script src="../kit/sunrise-icons.js"></script>
 <script src="../kit/sunrise-ui.js"></script>
-<script>
-  // Clone the rail into the drawer so nav is written once.
-  (function(){var r=document.querySelector('.sr-rail'),d=document.querySelector('.sr-drawer');if(r&&d&&!d.children.length){d.innerHTML=r.innerHTML;var b=d.querySelector('.sr-rail__brand'),f=d.querySelector('.sr-rail__foot');b.insertAdjacentHTML('beforeend','<button class="sr-icon-btn" style="margin-left:auto" data-sr-drawer-close aria-label="Close menu"><i class="ph ph-x"></i></button>');if(f)b.after(f);}})();
-  // Admin-only: wire the Theme Studio to your backend.
-  SRStudio.mount({ saveUrl: null /* e.g. '/admin/theme' */ });
-  // Pay / unlock sheet: <button data-sr-unlock data-title="…" data-kind="Unlock video" data-fee="100" data-earn="150" data-icon="video">
-  (function(){var f=document.getElementById('ul-form');if(!f)return;var $=function(i){return document.getElementById(i)};
-    document.addEventListener('click',function(e){var b=e.target.closest('[data-sr-unlock]');if(!b)return;
-      $('ul-title').textContent=b.dataset.title||'Unlock';$('ul-kicker').textContent=b.dataset.kind||'Unlock';
-      $('ul-fee').textContent=b.dataset.fee||'100';$('ul-earn').textContent='+KES '+(b.dataset.earn||'150');
-      $('ul-cta').textContent='Pay KES '+(b.dataset.fee||'100')+' via M-Pesa';
-      var ic=$('ul-icon');ic.setAttribute('data-icon',b.dataset.icon||'video');ic.removeAttribute('data-done');SRIcons.hydrate(ic.parentNode);
-      SRModal.open('unlock');});
-    f.addEventListener('submit',function(e){e.preventDefault();var p=$('ul-phone'),v=p.value.replace(/\s/g,''),btn=f.querySelector('[type=submit]');
-      if(!/^(\+?254|0)(7|1)\d{8}$/.test(v)){p.classList.add('is-invalid');$('ul-err').hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
-      p.classList.remove('is-invalid');$('ul-err').hidden=true;
-      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1300)})}).then(function(){setTimeout(function(){SRModal.close('unlock');SRToast.show({title:'Check your phone',text:'Enter your M-Pesa PIN to finish the payment',icon:'phone'});},800)});});
-  })();
-
-  // Demo wiring for the withdraw sheet
-  (function(){var f=document.getElementById('wd-form');if(!f)return;var inp=f.querySelector('#wd-amt'),err=f.querySelector('#wd-err');
-    f.addEventListener('click',function(e){var c=e.target.closest('[data-amt]');if(c){inp.value=c.dataset.amt;inp.classList.remove('is-invalid');err.hidden=true;}});
-    f.addEventListener('submit',function(e){e.preventDefault();var v=parseFloat(inp.value);var btn=f.querySelector('[type=submit]');
-      if(!(v>=100&&v<=12480.5)){inp.classList.add('is-invalid');err.hidden=false;btn.classList.add('is-shake');setTimeout(function(){btn.classList.remove('is-shake')},450);return;}
-      SRButton.run(btn,function(){return new Promise(function(r){setTimeout(r,1200)})}).then(function(){setTimeout(function(){SRModal.close('withdraw');SRToast.show({title:'Withdrawal requested',text:'KES '+v.toLocaleString()+' is on its way to M-Pesa',icon:'ph-check-circle'});f.reset();},900)});});
-  })();
-</script>
+<script src="js/app.js"></script>
 </body>
 </html>

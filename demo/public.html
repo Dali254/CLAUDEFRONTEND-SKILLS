@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jobs abroad · LUMADESK</title>
 <meta name="theme-color" content="#fbf8f5">
 <!-- 1. Fonts + icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="../kit/sunrise-fonts.css">
+<link rel="stylesheet" href="../kit/vendor/phosphor/phosphor.css">
 <!-- 2. Kit -->
 <link rel="stylesheet" href="../kit/sunrise.css">
 <!-- 3. Admin theme (server prints the saved JSON here) + engine BEFORE body paints -->
-<script>window.SR_THEME = { preset: "ember", allowUserColors: true };</script>
+<link rel="icon" href="data:,">
+<meta name="sr-theme" content='{"preset":"ember","allowUserColors":true}'>
 <script src="../kit/sunrise-theme.js"></script>
 </head>
 <body>
@@ -32,7 +33,7 @@
 
 <main class="sr-main" style="padding-bottom:3rem"><div class="sr-page">
   <section id="jobs" class="sr-stack" style="gap:1rem">
-    <form class="sr-search" role="search" onsubmit="event.preventDefault()">
+    <form class="sr-search" role="search" data-demo-submit="0">
       <label class="sr-search__field"><i class="ph ph-magnifying-glass"></i><input type="search" placeholder="Job title, keyword or company" aria-label="Keyword"></label>
       <label class="sr-search__field"><i class="ph ph-map-pin"></i><select aria-label="Country"><option value="">Any destination country</option><option>Qatar</option><option>UAE</option><option>Canada</option><option>Poland</option></select></label>
       <button class="sr-btn sr-btn--primary sr-btn--square sr-btn--lg sr-search__go">Find jobs</button>
@@ -51,9 +52,9 @@
     <div class="sr-panel__head"><span class="sr-panel__icon"><i class="sr-icon" data-icon="clipboard-task"></i></span><div class="sr-grow"><h2 class="sr-panel__title">Apply</h2><p class="sr-hint">Step 2 of 4 · About you</p></div></div>
     <div class="sr-panel__body sr-stack" style="gap:1.25rem">
       <div class="sr-steps"><span class="sr-step is-done">Details</span><span class="sr-step is-current">About you</span><span class="sr-step">Documents</span><span class="sr-step">Review</span></div>
-      <div class="sr-field"><label class="sr-label" for="em">7. Email address <span style="color:#ef4444">*</span></label><div class="sr-input-group"><i class="ph ph-envelope-simple"></i><input id="em" class="sr-input" type="email" autocomplete="email" value="amina.k@example.com"></div></div>
-      <fieldset class="sr-field" style="border:0;padding:0;margin:0"><legend class="sr-label" style="margin-bottom:.5rem">8. Do you have a passport? <span style="color:#ef4444">*</span></legend><div class="sr-pills"><label class="sr-pill"><input type="radio" name="pp"><span>Yes, I have a passport</span></label><label class="sr-pill"><input type="radio" name="pp" checked><span>No, not yet</span></label></div></fieldset>
-      <div class="sr-field"><span class="sr-label">9. Recent passport-size photo <span style="color:#ef4444">*</span></span><label class="sr-upload"><input type="file" accept="image/jpeg,image/png,image/webp"><span class="sr-upload__thumb"><i class="ph ph-user-square"></i></span><div><strong>Tap to upload a photo</strong><span>Plain light background, face clearly visible. JPG, PNG or WEBP, up to 5 MB.</span></div></label></div>
+      <div class="sr-field"><label class="sr-label" for="em">7. Email address <span class="sr-req" aria-hidden="true">*</span></label><div class="sr-input-group"><i class="ph ph-envelope-simple"></i><input id="em" class="sr-input" type="email" autocomplete="email" value="amina.k@example.com"></div></div>
+      <fieldset class="sr-field" style="border:0;padding:0;margin:0"><legend class="sr-label" style="margin-bottom:.5rem">8. Do you have a passport? <span class="sr-req" aria-hidden="true">*</span></legend><div class="sr-pills"><label class="sr-pill"><input type="radio" name="pp"><span>Yes, I have a passport</span></label><label class="sr-pill"><input type="radio" name="pp" checked><span>No, not yet</span></label></div></fieldset>
+      <div class="sr-field"><span class="sr-label">9. Recent passport-size photo <span class="sr-req" aria-hidden="true">*</span></span><label class="sr-upload"><input type="file" accept="image/jpeg,image/png,image/webp"><span class="sr-upload__thumb"><i class="ph ph-user-square"></i></span><div><strong>Tap to upload a photo</strong><span>Plain light background, face clearly visible. JPG, PNG or WEBP, up to 5 MB.</span></div></label></div>
     </div>
     <div class="sr-step-foot"><button class="sr-btn sr-btn--secondary sr-btn--square"><i class="ph ph-arrow-left"></i>Back</button><span class="sr-step-foot__info">Step 2 of 4</span><button class="sr-btn sr-btn--primary sr-btn--square">Continue<i class="ph ph-arrow-right"></i></button></div>
   </section>
@@ -61,5 +62,6 @@
 </div></main>
 <script src="../kit/sunrise-icons.js"></script>
 <script src="../kit/sunrise-ui.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
