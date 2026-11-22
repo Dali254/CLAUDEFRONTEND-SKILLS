@@ -1,8 +1,15 @@
 import asyncio,sys,json
 from playwright.async_api import async_playwright
+import os as _os
+def page_url(root, page):
+    """root may be a folder or an http(s) URL; page may omit .html"""
+    p = page if page.endswith('.html') else page + '.html'
+    if root.startswith(('http://', 'https://')): return root.rstrip('/') + '/' + p
+    return 'file://' + _os.path.abspath(root) + '/' + p
+
 PAGES=sys.argv[2].split(',') ; ROOT=sys.argv[1]
 JS_OVERFLOW="""()=>{const vw=document.documentElement.clientWidth,out=[];
-document.querySelectorAll('body *').forEach(el=>{const cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden'||el.closest('[hidden],.sr-drawer,.sr-studio,.sr-modal,.sr-filter-row,.sr-chips,.sr-tabs,.sr-table-wrap,.sr-snap,.sr-logos,.sr-toasts'))return;
+document.querySelectorAll('body *').forEach(el=>{const cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden'||el.closest('[hidden],.sr-drawer,.sr-studio,.sr-modal,.sr-filter-row,.sr-chips,.sr-tabs,.sr-table-wrap,.sr-snap,.sr-logos,.sr-promo-track,.sr-combo__pop,.sr-toasts'))return;
 const r=el.getBoundingClientRect();if(r.width&&(r.right>vw+1||r.left<-1))out.push((el.className&&el.className.baseVal===undefined?el.className:el.tagName)+'');});
 return [document.documentElement.scrollWidth>vw,out.slice(0,6)]}"""
 JS_OVERLAP="""()=>{const bad=[];const btns=[...document.querySelectorAll('.sr-page-head__actions .sr-btn,.sr-site-head__signin,.sr-page-head__title')];
@@ -28,13 +35,13 @@ if(Math.abs(r1.height-r0.height)>2||Math.abs(p1.height-p.height)>2)bad.push(el.c
 await new Promise(r=>setTimeout(r,700));return bad.slice(0,6)}"""
 async def main():
     async with async_playwright() as p:
-        b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--no-sandbox'])
+        b=await p.chromium.launch(args=['--no-sandbox'],**({'executable_path':_os.environ['SR_CHROME']} if _os.environ.get('SR_CHROME') else {}))
         fails=0
         for page in PAGES:
             for W in [360,390,412,768,1440]:
                 ctx=await b.new_context(viewport={'width':W,'height':860},is_mobile=W<768,has_touch=W<768)
                 pg=await ctx.new_page(); errs=[]; pg.on('pageerror',lambda e: errs.append(str(e)[:80]))
-                await pg.goto(f'file://{ROOT}/{page}.html'); await pg.wait_for_timeout(700)
+                await pg.goto(page_url(ROOT, page)); await pg.wait_for_timeout(700)
                 await pg.evaluate("""async()=>{const H=document.documentElement.scrollHeight;for(let y=0;y<H;y+=400){scrollTo(0,y);await new Promise(r=>setTimeout(r,25))}scrollTo(0,0)}""")
                 ov=await pg.evaluate(JS_OVERFLOW); ol=await pg.evaluate(JS_OVERLAP); tp=await pg.evaluate(JS_TAP); tx=await pg.evaluate(JS_TEXT)
                 ok=not ov[0] and not ov[1] and not ol and not tp and not errs and not tx

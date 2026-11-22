@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Copy the UI kit into the PHP kit's assets (backend/assets/sunrise). --check: fail if they differ (R5).
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"; SRC="$ROOT/kit"; DST="$ROOT/backend/assets/sunrise"
+if [[ "${1:-}" == "--check" ]]; then
+  diff -rq "$SRC" "$DST" >/dev/null 2>&1 && { echo "kit copy in sync"; exit 0; } || { echo "backend/assets/sunrise differs from kit/ (run tools/sync-kit)"; exit 1; }
+fi
+rm -rf "$DST"; mkdir -p "$DST"; cp -R "$SRC/." "$DST/"; echo "copied kit/ -> backend/assets/sunrise"

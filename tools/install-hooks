@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Turn on the repository's git hooks (pre-commit runs tools/check-all --fast).
+cd "$(dirname "$0")/.." && git config core.hooksPath .githooks && chmod +x .githooks/* tools/check-all tools/sync-rules tools/sync-kit tools/release && echo "hooks on: .githooks/pre-commit"

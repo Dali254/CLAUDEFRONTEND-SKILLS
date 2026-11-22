@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# tools/check-all — every rule that can be tested, in one command (R33). Exit code 0 only when everything passes.
+#   tools/check-all           full run: static checks + kit demo QA + backend browser QA + security + upgrade + release zip
+#   tools/check-all --fast    static checks only (rules/kit in sync, php -l, node --check, .php URLs, inline JS, icons, secrets, release zip)
+# Full runs need: php 8.2+, node, python3 + playwright (+ Chrome or `playwright install chromium`), the mysql client,
+# and a MySQL/MariaDB user that may create databases named sr_ci_* (SR_TEST_DB_HOST/PORT/USER/PASS, default sr_ci / sr_ci_pw on 127.0.0.1).
+# Optional: SR_UPGRADE_DUMP=/path/live.sql to run the upgrade test on a copy of your live database.
+set -u
+cd "$(dirname "$0")/.."
+MODE=full; [ "${1:-}" = "--fast" ] && MODE=fast
+FAILED=(); PASSED=(); LOG=$(mktemp -d)
+step() {   # step "name" command…
+  local name="$1"; shift
+  printf '\033[1m▸ %s\033[0m\n' "$name"
+  if "$@" >"$LOG/out" 2>&1; then PASSED+=("$name"); tail -n 3 "$LOG/out" | sed 's/^/    /'
+  else FAILED+=("$name"); sed 's/^/    /' "$LOG/out" | tail -n 60; fi
+}
+php_lint()  { local bad=0; while IFS= read -r -d '' f; do php -l "$f" >/dev/null 2>"$LOG/e" || { echo "FAIL $f: $(cat "$LOG/e")"; bad=1; }; done < <(find backend tools -name '*.php' -print0); \
+              [ $bad = 0 ] && echo "php -l: $(find backend tools -name '*.php' | wc -l) files OK"; return $bad; }
+node_lint() { local bad=0; for f in kit/*.js demo/js/*.js backend/assets/*.js backend/app/modules/*/*.js tools/qa/*.js; do [ -f "$f" ] || continue; node --check "$f" 2>"$LOG/e" || { echo "FAIL $f: $(head -3 "$LOG/e")"; bad=1; }; done; \
+              [ $bad = 0 ] && echo "node --check: OK"; return $bad; }
+no_php_urls() {   # R20 · no ".php" in any href, form action, redirect, url() or route (our own URLs; other sites may use .php)
+  local hits; hits=$(grep -rnE "(href|action)=\"(/|\.\./|[a-z0-9_-]+)[^\":]*\.php|redirect\(\s*['\"][^'\"]*\.php|url\(\s*['\"][^'\"]*\.php|route\([^)]*['\"][^'\"]*\.php['\"]|Location: [^'\"]*\.php" \
+          backend/app backend/assets demo kit --include='*.php' --include='*.html' --include='*.js' | grep -v 'R20' || true)
+  [ -z "$hits" ] && echo "no .php URLs in links, forms, redirects or routes" && return 0; echo "$hits"; return 1; }
+no_inline_js() {  # R7 · no on…= handlers, every inline <script> carries the nonce, no javascript: URLs
+  local hits; hits=$( { grep -rnE "<[a-zA-Z][^>]*[[:space:]]on[a-z]+=[\"']" backend/app demo --include='*.php' --include='*.html'; \
+                        grep -rnE "<script(\s[^>]*)?>" backend/app demo --include='*.php' --include='*.html' | grep -vE "src=|nonce=" ; \
+                        grep -rnE "href=[\"']javascript:" backend/app demo kit --include='*.php' --include='*.html' --include='*.js'; } || true)
+  [ -z "$hits" ] && echo "no inline handlers; inline scripts carry the nonce" && return 0; echo "$hits"; return 1; }
+demo_qa() {       # kit demo pages: contrast (light + dark), overflow, console errors, CSP
+  local port; port=$(python3 -c 'import socket;s=socket.socket();s.bind(("127.0.0.1",0));print(s.getsockname()[1])')
+  python3 -m http.server "$port" --bind 127.0.0.1 >/dev/null 2>&1 & local pid=$!; sleep 1
+  python3 tools/qa_all.py --base "http://127.0.0.1:$port/demo/" --public "$(ls demo/*.html | xargs -n1 basename | tr '\n' ',' | sed 's/,$//')" \
+      --widths 360,390,412,768,1366 --themes light,dark ${SR_CHROME:+--chrome "$SR_CHROME"} $( [ -z "${SR_CHROME:-}" ] && [ -x /usr/bin/google-chrome ] && echo --chrome /usr/bin/google-chrome ); local rc=$?
+  kill $pid 2>/dev/null; return $rc; }
+grep_rules() {    # R13 · no calc(100dvh - …) for full-height screens   R14 · no monospace font for amounts in project code
+  local hits; hits=$( { grep -rnE "calc\(100d?vh *-" backend demo --exclude-dir=sunrise --include='*.css' --include='*.php' --include='*.html'; grep -nE "\.sr-chat[^{]*\{[^}]*calc\(100d?vh" kit/sunrise.css; \
+                        grep -rnE "(amount|money|price|balance|code|receipt)[^{;]*\{[^}]*(font-mono|monospace)" backend/assets demo --exclude-dir=sunrise --include='*.css' --include='*.html'; } || true)
+  [ -z "$hits" ] && echo "R13/R14 greps clean" && return 0; echo "$hits"; return 1; }
+sql_safety() {    # R21 · request data never goes into SQL strings
+  local hits; hits=$(grep -rnE "(q|one|all|val|paginate|exec|query|prepare)\(\s*[\"'][^\"']*(SELECT|INSERT|UPDATE|DELETE|WHERE)[^;]*\\$_(GET|POST|REQUEST|COOKIE|SERVER)|\{\\$_(GET|POST|REQUEST|COOKIE)|[\"'] *\. *\\$_(GET|POST|REQUEST|COOKIE)\[[^]]*\] *\. *[\"'][^\"']*(AND|OR|WHERE|ORDER|LIMIT|,|\))" backend/app --include='*.php' || true)
+  [ -z "$hits" ] && echo "no request data in SQL strings" && return 0; echo "$hits"; return 1; }
+wording() {       # R19 · members read "stages", never fee/fees (visible text only: tags, attributes and class names are ignored)
+  python3 - <<'PY'
+import re, glob, sys
+files = [f for f in glob.glob('backend/app/views/**/*.php', recursive=True) + glob.glob('backend/app/modules/*/views/*.php') + glob.glob('demo/*.html') + glob.glob('backend/app/modules/*/module.php')
+         if not re.search(r'views/admin|/admin-', f)]
+bad = []
+for f in files:
+    for n, line in enumerate(open(f, encoding='utf-8'), 1):
+        text = re.sub(r'<[^>]*>', ' ', line); text = re.sub(r'\$\w+|\b\w+-fee\b|\bfee-\w+', ' ', text)
+        if re.search(r'(?<![\w$-])fees?(?![\w-])', text, re.I): bad.append('%s:%d: %s' % (f, n, line.strip()[:120]))
+print('\n'.join(bad) if bad else 'member wording uses stages'); sys.exit(1 if bad else 0)
+PY
+}
+demo_qa_themes() { local port; port=$(python3 -c 'import socket;s=socket.socket();s.bind(("127.0.0.1",0));print(s.getsockname()[1])')
+  python3 -m http.server "$port" --bind 127.0.0.1 >/dev/null 2>&1 & local pid=$!; sleep 1
+  python3 tools/qa_all.py --base "http://127.0.0.1:$port/demo/" --public "$(ls demo/*.html | xargs -n1 basename | tr '\n' ',' | sed 's/,$//')" --widths 390 --themes all \
+      ${SR_CHROME:+--chrome "$SR_CHROME"} $( [ -z "${SR_CHROME:-}" ] && [ -x /usr/bin/google-chrome ] && echo --chrome /usr/bin/google-chrome ); local rc=$?; kill $pid 2>/dev/null; return $rc; }
+dw_check() { SR_CHROME="${SR_CHROME:-$( [ -x /usr/bin/google-chrome ] && echo /usr/bin/google-chrome )}" python3 tools/dw_measure.py demo > "$LOG/dw" 2>&1; cat "$LOG/dw" | grep -E "^OFF|OFF:" ; grep -q "^OFF: 0 of" "$LOG/dw"; }
+db_ready() { MYSQL_PWD="${SR_TEST_DB_PASS:-sr_ci_pw}" mysql -h "${SR_TEST_DB_HOST:-127.0.0.1}" -P "${SR_TEST_DB_PORT:-3306}" -u "${SR_TEST_DB_USER:-sr_ci}" -e 'SELECT 1' >/dev/null 2>&1 \
+             || { echo "FAIL cannot reach the test database (set SR_TEST_DB_HOST/USER/PASS, or run tools/check-all --fast for static checks only)"; return 1; }; echo "test database reachable"; }
+
+step "Rules: entry files match RULES.md"           python3 tools/sync-rules --check
+step "Kit copy in backend matches kit/"            bash tools/sync-kit --check
+step "PHP syntax (php -l)"                         php_lint
+step "JS syntax (node --check)"                    node_lint
+step "No .php URLs (R20)"                          no_php_urls
+step "No inline JS; nonce on inline scripts (R7)"  no_inline_js
+step "Icons exist"                                 node tools/qa/icons_check.js
+step "Full-height + number fonts (R13, R14)"       grep_rules
+step "SQL uses bound parameters (R21)"             sql_safety
+step "Payment wording: stages, not fees (R19)"     wording
+step "No secrets in the files you commit (R26)"    python3 tools/release --scan-tree
+step "Release zip: no config, no keys, guards in"  python3 tools/release --out "$LOG/dist"
+if [ $MODE = full ]; then
+  step "Kit demos: contrast, overflow, errors, CSP"  demo_qa
+  step "Kit demos: every dark theme at 390px (R16)"  demo_qa_themes
+  step "DreamWork phone sizes (R10)"                 dw_check
+  if db_ready >"$LOG/db" 2>&1; then
+    step "Backend pages at 5 widths + large text"    python3 tools/qa/check_backend.py
+    step "Security tests"                            python3 tools/qa/check_security.py
+    step "Upgrade test (auto migrations)"            python3 tools/qa/check_upgrade.py
+  else FAILED+=("Test database"); cat "$LOG/db"; fi
+fi
+echo; echo "────────────────────────────────────────"
+for s in "${PASSED[@]}"; do printf '  \033[32m✔\033[0m %s\n' "$s"; done
+for s in "${FAILED[@]}"; do printf '  \033[31m✘\033[0m %s\n' "$s"; done
+echo "────────────────────────────────────────"
+rm -rf "$LOG"
+if [ ${#FAILED[@]} -gt 0 ]; then echo "check-all ($MODE): ${#FAILED[@]} FAILED, ${#PASSED[@]} passed — do not say 'done' (R33)"; exit 1; fi
+echo "check-all ($MODE): all ${#PASSED[@]} checks passed"; [ $MODE = fast ] && echo "(fast mode: run tools/check-all for the browser, security and upgrade tests)"; exit 0
