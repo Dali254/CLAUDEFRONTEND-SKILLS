@@ -5,4 +5,6 @@ Icons bundled in `kit/sunrise-icons.js` (inline SVG):
 - **Lucide** — © Lucide Contributors, ISC License — https://lucide.dev
 - **Tabler Icons** — © Paweł Kuna, MIT License — https://tabler.io/icons
 - **Font Awesome Free** (solid icons) — © Fonticons, Inc., icons CC BY 4.0 — https://fontawesome.com/license/free
-Loaded from CDN: **Phosphor Icons** (MIT, https://phosphoricons.com); fonts **Inter**, **Sora**, **JetBrains Mono** (SIL Open Font License, via Google Fonts).
+Self-hosted in `kit/` (no CDN):
+- **Phosphor Icons** (regular CSS + `Phosphor.woff2`, `kit/vendor/phosphor/`) — © Phosphor Icons, MIT License — https://phosphoricons.com
+- **Inter** (© The Inter Project Authors), **Sora** (© The Sora Project Authors), **JetBrains Mono** (© JetBrains s.r.o.) — SIL Open Font License 1.1, latin subsets via @fontsource, in `kit/fonts/` (license texts included).
